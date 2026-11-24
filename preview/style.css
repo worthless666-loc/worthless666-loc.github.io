@@ -1,0 +1,115 @@
+/* Переведено — общие стили и анимации (превью). Цвет акцента #F2B84B.
+   Анимируются только transform и opacity. */
+@view-transition{navigation:auto}
+body{margin:0;background:#0E1116}
+a{color:#F2B84B}a:hover{color:#FFD27A}
+:root{--acc:#F2B84B;--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+
+/* ---------- шапка: мягкое свечение ---------- */
+.hdr{position:relative;isolation:isolate;overflow:hidden}
+.hdr::before{content:"";position:absolute;z-index:-1;left:-20%;top:-260px;width:70%;height:520px;
+  background:radial-gradient(closest-side,rgba(242,184,75,.16),rgba(242,184,75,0));
+  animation:hdrGlow 14s ease-in-out infinite alternate;pointer-events:none;will-change:transform}
+@keyframes hdrGlow{from{transform:translate3d(0,0,0)}to{transform:translate3d(90%,40px,0)}}
+
+/* ---------- ссылки меню: выезжающее подчёркивание ---------- */
+.navl{position:relative}
+.navl::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:2px;border-radius:2px;
+  background:var(--acc);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+.navl:hover,.navl:focus-visible{color:#E8E6E1!important}
+.navl:hover::after,.navl:focus-visible::after{transform:scaleX(1);transform-origin:left}
+
+/* ---------- кнопки ---------- */
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-block;
+  transition:translate .35s var(--ease),scale .18s var(--ease),border-color .25s;will-change:transform}
+.btn:active{scale:.95;transition-duration:.08s}
+.btn-primary::before{content:"";position:absolute;z-index:-1;inset:-2px;border-radius:inherit;
+  box-shadow:0 10px 30px -6px rgba(242,184,75,.65);opacity:0;transition:opacity .3s}
+.btn-primary::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;pointer-events:none;
+  background:linear-gradient(105deg,rgba(255,255,255,0) 20%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 80%);
+  transform:translateX(-140%) skewX(-18deg)}
+.btn-primary:hover::before,.btn-primary:focus-visible::before{opacity:1}
+.btn-primary:hover::after,.btn-primary:focus-visible::after{transform:translateX(260%) skewX(-18deg);transition:transform .8s var(--ease)}
+.btn-primary:hover{color:#14110A}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--acc)!important}
+.btn-ghost::before{content:"";position:absolute;z-index:-1;inset:0;background:rgba(242,184,75,.08);opacity:0;transition:opacity .25s}
+.btn-ghost:hover::before{opacity:1}
+.btn:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.ripple{position:absolute;z-index:-1;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;pointer-events:none;
+  background:rgba(20,17,10,.28);transform:scale(0);opacity:1;animation:ripple .6s var(--ease) forwards}
+.btn-ghost .ripple,.arrow-link .ripple{background:rgba(242,184,75,.35)}
+@keyframes ripple{to{transform:scale(var(--rs,18));opacity:0}}
+.arr{display:inline-block;transition:transform .35s var(--spring)}
+a:hover>.arr,a:focus-visible>.arr,.gcard:hover .gcard-link>.arr{transform:translateX(5px)}
+
+/* ---------- карточки проектов ---------- */
+.gcard{position:relative;
+  transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) scale(var(--cs,1));
+  transition:transform .5s var(--ease),border-color .3s;will-change:transform}
+.gcard.tilting{transition:transform .12s linear,border-color .3s}
+.gcard::before{content:"";position:absolute;inset:-1px;border-radius:17px;z-index:-1;pointer-events:none;
+  box-shadow:0 24px 60px -18px rgba(242,184,75,.45),0 0 0 1px rgba(242,184,75,.55);opacity:0;transition:opacity .35s}
+.gcard.is-hot{--ty:-6px;border-color:rgba(242,184,75,.7)!important}
+.gcard.is-hot::before{opacity:1}
+.gcard.pressed{--cs:.975;transition-duration:.1s}
+.glare-clip{position:absolute;inset:0;border-radius:16px;overflow:hidden;pointer-events:none;z-index:3}
+.glare{position:absolute;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,226,160,.20),rgba(255,226,160,.06) 45%,rgba(255,226,160,0));
+  opacity:0;transition:opacity .35s;transform:translate3d(var(--gx,50%),var(--gy,50%),0);will-change:transform}
+.gcard.is-hot .glare{opacity:1}
+.gbanner{display:block;overflow:hidden}
+.gbanner>svg{transform:translate3d(var(--px,0px),var(--py,0px),0) scale(var(--zs,1));transition:transform .6s var(--ease);will-change:transform}
+.gcard.is-hot .gbanner>svg{--zs:1.07}
+.gcard.tilting .gbanner>svg{transition:transform .25s linear}
+.gcard-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:16px}
+.gcard-link:focus{outline:none}
+.gcard-link:focus-visible::after{outline:2px solid var(--acc);outline-offset:3px}
+.gcard-tg{position:relative;z-index:4}
+.gcard-tg:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.bar-fill{transform-origin:left center;transform:scaleX(0);transition:transform 1.4s var(--ease) .2s}
+.bar-fill.in{transform:scaleX(1)}
+
+/* ---------- плитки ---------- */
+.tiles>div{transition:transform .35s var(--ease),border-color .3s}
+.tiles>div:hover{transform:translateY(-3px);border-color:rgba(242,184,75,.5)!important}
+
+/* ---------- появление при прокрутке ---------- */
+.js .rv{opacity:0;transform:translate3d(0,22px,0);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .gcard.rv.in{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) scale(var(--cs,1));
+  transition:transform .6s var(--ease) var(--d,0s),opacity .7s var(--ease) var(--d,0s),border-color .3s}
+.js .gcard.rv.in.tilting{transition:transform .12s linear,opacity .7s,border-color .3s}
+.js .gcard.rv.in.pressed{transition-duration:.1s}
+
+/* баннер карточки «перелетает» в шапку страницы игры */
+.vt-fa{view-transition-name:fa-banner}
+::view-transition-group(fa-banner){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
+html.leaving body{opacity:0;transition:opacity .18s}
+
+/* ---------- телефон / касание ---------- */
+@media (hover:none){
+  .gcard:active{--cs:.975}
+  .gcard:active::before{opacity:1}
+}
+
+@media (max-width:480px){
+header>div,main>section,footer>div{padding-left:20px!important;padding-right:20px!important}
+h1{font-size:2rem!important;overflow-wrap:break-word}
+.hero-btns>a{flex:1 1 100%;text-align:center;box-sizing:border-box}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+.tiles>div{padding:14px!important;min-height:112px!important}
+.tile-v{font-size:19px!important;line-height:1.25;overflow-wrap:break-word}
+#download>div{padding:24px!important}
+}
+
+/* ---------- без движения ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+  .bar-fill{transform:none}
+  .gcard,.gcard.is-hot{transform:none}
+  .gbanner>svg{transform:none!important}
+  .glare{display:none}
+  @view-transition{navigation:none}
+}

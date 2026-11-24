@@ -502,7 +502,17 @@
     function swap(html, after) {
       var old = box.querySelector('.quiz-stage');
       function put() {
+        var h0 = box.getBoundingClientRect().height;
         box.innerHTML = html;
+        if (!reduce) {
+          box.style.transition = 'none'; box.style.height = 'auto';
+          var h1 = box.getBoundingClientRect().height;
+          if (Math.abs(h1 - h0) > 1) {
+            box.style.height = h0 + 'px'; box.offsetHeight;
+            box.style.transition = 'height .45s cubic-bezier(.2,.8,.2,1)'; box.style.height = h1 + 'px';
+            clearTimeout(box._ht); box._ht = setTimeout(function () { box.style.transition = ''; box.style.height = ''; }, 500);
+          } else box.style.height = '';
+        }
         var st = box.querySelector('.quiz-stage');
         if (!reduce && st.animate) st.animate([{ opacity: 0, transform: 'translateX(36px)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
         if (after) after(st);

@@ -365,11 +365,11 @@ body>div:first-child{
 @keyframes lwT1{0%,70%{opacity:1}74%,96%{opacity:0}100%{opacity:1}}
 @keyframes lwDone{0%,70%{opacity:0}74%,96%{opacity:1}100%{opacity:0}}
 @media (max-width:900px){.lnch{grid-template-columns:minmax(0,1fr);padding:28px 22px;gap:28px}}
-@media (max-width:480px){.lw-body{grid-template-columns:minmax(0,1fr)}.lw-list{border-right:0;border-bottom:1px solid #1F242E}.lnch-text h2{font-size:24px}}
+@media (max-width:480px){.lw-bar b{font-size:11px;white-space:nowrap}.lw-body{grid-template-columns:minmax(0,1fr)}.lw-list{border-right:0;border-bottom:1px solid #1F242E}.lnch-text h2{font-size:24px}}
 @media (prefers-reduced-motion:reduce){.lw-btn,.lw-btn .t1,.lw-btn .t2,.lw-fill,.lnch-badge::before{animation:none}.lw-fill{transform:scaleX(.64)}}
 
 /* ---------- тест «Какая ты Алиса?» ---------- */
-.quiz{position:relative;background:#161A22;border:1px solid #262B36;border-radius:20px;padding:32px;overflow:hidden;min-height:360px}
+.quiz{position:relative;background:#161A22;border:1px solid #262B36;border-radius:20px;padding:32px;overflow:hidden;box-sizing:border-box}
 .quiz-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;color:#9A978F;font-size:14px}
 .quiz-bar{flex:1;height:6px;border-radius:999px;background:#262B36;overflow:hidden;max-width:320px}
 .quiz-bar i{display:block;height:100%;background:var(--acc);border-radius:999px;transform-origin:0 50%;transition:transform .5s var(--ease)}

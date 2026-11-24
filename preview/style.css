@@ -20,7 +20,8 @@ main section[id]{scroll-margin-top:96px}
 @media (max-width:640px){.hdr{position:relative}.hdr::after{opacity:0!important}}
 
 /* ---------- фон первого экрана главной: арты игр ---------- */
-.hero-bg{position:absolute;z-index:-2;left:0;right:0;top:0;height:var(--hero-h,720px);overflow:hidden;pointer-events:none;background:#0E1116}
+.hero-bg{position:absolute;z-index:-2;left:0;right:0;top:0;height:var(--hero-h,720px);overflow:hidden;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 58%,rgba(0,0,0,.6) 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 58%,rgba(0,0,0,.6) 78%,transparent 100%)}
 .hb{position:absolute;inset:-4%;background-size:cover;background-position:60% 40%;opacity:0;will-change:transform,opacity}
 .hb1{opacity:1;animation:hbFade 16s linear infinite,kenA 16s ease-in-out infinite alternate}
 .hb2{animation:hbFade 16s linear -8s infinite,kenB 16s ease-in-out infinite alternate}
@@ -29,14 +30,14 @@ main section[id]{scroll-margin-top:96px}
 @keyframes kenB{from{transform:scale(1.12) translate3d(1.5%,1%,0)}to{transform:scale(1.04) translate3d(-1%,0,0)}}
 .hb-shade{position:absolute;inset:0;background:
   linear-gradient(90deg,rgba(14,17,22,.94) 0%,rgba(14,17,22,.86) 34%,rgba(14,17,22,.5) 62%,rgba(14,17,22,.22) 100%),
-  linear-gradient(180deg,rgba(14,17,22,.55) 0%,rgba(14,17,22,0) 22%,rgba(14,17,22,0) 62%,#0E1116 100%)}
+  linear-gradient(180deg,rgba(14,17,22,.55) 0%,rgba(14,17,22,0) 22%)}
 .split .w{display:inline-block;opacity:0;transform:translate3d(0,.45em,0);
   animation:wIn .8s var(--ease) forwards;animation-delay:calc(.15s + var(--i) * .07s)}
 @keyframes wIn{to{opacity:1;transform:none}}
 @media (max-width:640px){
   .hb1,.hb2{animation-name:hbFade}
   .hb{inset:0;background-position:65% 50%}
-  .hb-shade{background:linear-gradient(180deg,rgba(14,17,22,.82) 0%,rgba(14,17,22,.78) 60%,#0E1116 100%)}
+  .hb-shade{background:linear-gradient(180deg,rgba(14,17,22,.82) 0%,rgba(14,17,22,.74) 100%)}
 }
 
 /* ---------- ссылки меню: выезжающее подчёркивание ---------- */

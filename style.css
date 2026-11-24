@@ -251,3 +251,4 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
   .step:not(:last-child)::before,.step:not(:last-child)::after{left:calc(50% + 32px);width:calc(100% - 44px)}
   .step-card strong{line-height:1.35;min-height:calc(2em * 1.35);display:flex;align-items:flex-start}
 }
+.step-num{box-sizing:border-box}

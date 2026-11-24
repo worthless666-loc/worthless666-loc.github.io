@@ -15,6 +15,39 @@
     if (goal) { try { window.ym(114653532, 'reachGoal', goal); } catch (err) {} }
   }, true);
 
+  /* ---------- полоска прогресса прокрутки ---------- */
+  var sp = document.createElement('div'); sp.className = 'scroll-prog'; sp.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(sp);
+  var spq = 0;
+  function spUpd() {
+    spq = 0;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    sp.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0).toFixed(4) + ')';
+  }
+  window.addEventListener('scroll', function () { if (!spq) spq = requestAnimationFrame(spUpd); }, { passive: true });
+  window.addEventListener('resize', function () { if (!spq) spq = requestAnimationFrame(spUpd); });
+  spUpd();
+
+  /* ---------- мягкое свечение за курсором (только мышь, без reduced-motion) ---------- */
+  var wrapEl = document.querySelector('body > div');
+  if (fine && !reduce && wrapEl) {
+    var cg = document.createElement('div'); cg.className = 'cursor-glow'; cg.setAttribute('aria-hidden', 'true');
+    wrapEl.appendChild(cg);
+    var tx = -999, ty = -999, cx = -999, cy = -999, cgq = 0;
+    function cgTick() {
+      cx += (tx - cx) * 0.14; cy += (ty - cy) * 0.14;
+      cg.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+      cgq = (Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) ? requestAnimationFrame(cgTick) : 0;
+    }
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      if (cx < -900) { cx = e.clientX; cy = e.clientY; }
+      tx = e.clientX; ty = e.clientY; cg.classList.add('on');
+      if (!cgq) cgq = requestAnimationFrame(cgTick);
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', function () { cg.classList.remove('on'); });
+  }
+
   /* ---------- шапка: фон и линия появляются при прокрутке ---------- */
   var hdr = document.querySelector('.hdr'), hq = 0;
   function hcheck() { hq = 0; if (hdr) hdr.classList.toggle('scrolled', window.scrollY > 8); }

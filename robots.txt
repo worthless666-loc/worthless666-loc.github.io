@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://worthless666-loc.github.io/sitemap.xml
+Sitemap: https://perevedeno.com/sitemap.xml

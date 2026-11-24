@@ -3,12 +3,15 @@
 @view-transition{navigation:auto}
 body{margin:0;background:#0E1116}
 a{color:#F2B84B}a:hover{color:#FFD27A}
-:root{--acc:#F2B84B;--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+:root{
+  /* свечение вверху страницы: белое; transparent — выключить; rgba(242,184,75,.13) — прежнее жёлтое */
+  --hero-glow:rgba(255,255,255,.085);
+  --acc:#F2B84B;--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1)}
 
 /* ---------- шапка: прозрачная, свечение цельное под ней; фон и линия — при прокрутке ---------- */
 body>div:first-child{position:relative;isolation:isolate;overflow:clip}
 body>div:first-child::before{content:"";position:absolute;z-index:-1;left:-15%;top:-300px;width:70%;height:640px;
-  background:radial-gradient(closest-side,rgba(242,184,75,.15),rgba(242,184,75,.05) 55%,rgba(242,184,75,0));
+  background:radial-gradient(closest-side,var(--hero-glow),transparent);
   animation:hdrGlow 16s ease-in-out infinite alternate;pointer-events:none;will-change:transform}
 @keyframes hdrGlow{from{transform:translate3d(0,0,0)}to{transform:translate3d(75%,50px,0)}}
 .hdr{position:sticky;top:0;z-index:50;border-bottom-color:transparent!important}

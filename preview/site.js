@@ -24,7 +24,7 @@
   }
   document.querySelectorAll('main > section').forEach(function (sec, si) {
     var direct = Array.prototype.filter.call(sec.children, function (c) {
-      return !c.querySelector('article') && !c.classList.contains('tiles');
+      return !c.querySelector('article') && !c.classList.contains('tiles') && !c.classList.contains('vt-fa');
     });
     reveal(direct, 0.07);
     reveal(sec.querySelectorAll('article'), 0.12);
@@ -55,6 +55,7 @@
         el.textContent = (p < 1 ? Math.round(target * k) : txt.replace(/%$/, '').trim()) + m[2];
         if (p < 1) requestAnimationFrame(tick); else el.textContent = txt;
       })(t0);
+      setTimeout(function () { el.textContent = txt; }, dur + 400);
     };
     io.observe(el);
   });

@@ -21,16 +21,13 @@ a{color:#F2B84B}a:hover{color:#FFD27A}
 
 /* ---------- кнопки ---------- */
 .btn{position:relative;overflow:hidden;isolation:isolate;display:inline-block;
-  transition:translate .35s var(--ease),scale .18s var(--ease),border-color .25s;will-change:transform}
+  transition:translate .35s var(--ease),scale .18s var(--ease),border-color .25s,box-shadow .3s;will-change:transform}
 .btn:active{scale:.95;transition-duration:.08s}
-.btn-primary::before{content:"";position:absolute;z-index:-1;inset:-2px;border-radius:inherit;
-  box-shadow:0 10px 30px -6px rgba(242,184,75,.65);opacity:0;transition:opacity .3s}
 .btn-primary::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;pointer-events:none;
   background:linear-gradient(105deg,rgba(255,255,255,0) 20%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 80%);
   transform:translateX(-140%) skewX(-18deg)}
-.btn-primary:hover::before,.btn-primary:focus-visible::before{opacity:1}
 .btn-primary:hover::after,.btn-primary:focus-visible::after{transform:translateX(260%) skewX(-18deg);transition:transform .8s var(--ease)}
-.btn-primary:hover{color:#14110A}
+.btn-primary:hover,.btn-primary:focus-visible{color:#14110A;box-shadow:0 10px 28px -8px rgba(242,184,75,.75),0 0 0 1px rgba(255,214,130,.6)}
 .btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--acc)!important}
 .btn-ghost::before{content:"";position:absolute;z-index:-1;inset:0;background:rgba(242,184,75,.08);opacity:0;transition:opacity .25s}
 .btn-ghost:hover::before{opacity:1}
@@ -54,7 +51,7 @@ a:hover>.arr,a:focus-visible>.arr,.gcard:hover .gcard-link>.arr{transform:transl
 .gcard.pressed{--cs:.975;transition-duration:.1s}
 .glare-clip{position:absolute;inset:0;border-radius:16px;overflow:hidden;pointer-events:none;z-index:3}
 .glare{position:absolute;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(255,226,160,.20),rgba(255,226,160,.06) 45%,rgba(255,226,160,0));
+  background:radial-gradient(closest-side,rgba(255,226,160,.26),rgba(255,226,160,.08) 45%,rgba(255,226,160,0));
   opacity:0;transition:opacity .35s;transform:translate3d(var(--gx,50%),var(--gy,50%),0);will-change:transform}
 .gcard.is-hot .glare{opacity:1}
 .gbanner{display:block;overflow:hidden}

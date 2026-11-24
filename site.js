@@ -6,6 +6,15 @@
   root.classList.add('js');
   window.__siteReady = true;
 
+  /* ---------- цели Яндекс Метрики (счётчик 114653532) ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a || typeof window.ym !== 'function') return;
+    var h = a.getAttribute('href'), goal = '';
+    if (/\.zip(\?|$)/.test(h)) goal = /False-Alice/i.test(h) ? 'download-false-alice' : /Psycho-Sleuth/i.test(h) ? 'download-psycho-sleuth' : 'download';
+    else if (a.getAttribute('data-goatcounter-click') === 'tg-subscribe') goal = 'tg-subscribe';
+    if (goal) { try { window.ym(114653532, 'reachGoal', goal); } catch (err) {} }
+  }, true);
+
   /* ---------- шапка: фон и линия появляются при прокрутке ---------- */
   var hdr = document.querySelector('.hdr'), hq = 0;
   function hcheck() { hq = 0; if (hdr) hdr.classList.toggle('scrolled', window.scrollY > 8); }

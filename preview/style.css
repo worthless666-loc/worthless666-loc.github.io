@@ -28,7 +28,7 @@ main section[id]{scroll-margin-top:96px}
 @keyframes kenA{from{transform:scale(1.04) translate3d(-1%,0,0)}to{transform:scale(1.14) translate3d(1.5%,-1%,0)}}
 @keyframes kenB{from{transform:scale(1.12) translate3d(1.5%,1%,0)}to{transform:scale(1.04) translate3d(-1%,0,0)}}
 .hb-shade{position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(14,17,22,.93) 0%,rgba(14,17,22,.86) 38%,rgba(14,17,22,.62) 68%,rgba(14,17,22,.5) 100%),
+  linear-gradient(90deg,rgba(14,17,22,.94) 0%,rgba(14,17,22,.86) 34%,rgba(14,17,22,.5) 62%,rgba(14,17,22,.22) 100%),
   linear-gradient(180deg,rgba(14,17,22,.55) 0%,rgba(14,17,22,0) 22%,rgba(14,17,22,0) 62%,#0E1116 100%)}
 .split .w{display:inline-block;opacity:0;transform:translate3d(0,.45em,0);
   animation:wIn .8s var(--ease) forwards;animation-delay:calc(.15s + var(--i) * .07s)}

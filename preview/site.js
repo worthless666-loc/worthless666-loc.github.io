@@ -5,6 +5,12 @@
   var fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   root.classList.add('js');
 
+  /* ---------- шапка: фон и линия появляются при прокрутке ---------- */
+  var hdr = document.querySelector('.hdr'), hq = 0;
+  function hcheck() { hq = 0; if (hdr) hdr.classList.toggle('scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', function () { if (!hq) hq = requestAnimationFrame(hcheck); }, { passive: true });
+  document.addEventListener('DOMContentLoaded', hcheck);
+
   /* ---------- появление при прокрутке, ступеньками ---------- */
   var io = ('IntersectionObserver' in window) && !reduce ? new IntersectionObserver(function (es) {
     es.forEach(function (e) {

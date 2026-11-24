@@ -91,7 +91,7 @@ a:hover>.arr,a:focus-visible>.arr,.gcard:hover .gcard-link>.arr{transform:transl
 .gcard-link:focus-visible::after{outline:2px solid var(--acc);outline-offset:3px}
 .gcard-tg{position:relative;z-index:4}
 .gcard-tg:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-.bar-fill{transform-origin:left center;transform:scaleX(0);transition:transform 1.4s var(--ease) .2s}
+.bar-fill{transform-origin:left center;transform:scaleX(0)}
 .bar-fill.in{transform:scaleX(1)}
 
 /* ---------- плитки ---------- */

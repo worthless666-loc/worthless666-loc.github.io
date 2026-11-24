@@ -37,9 +37,10 @@
   var io = ('IntersectionObserver' in window) && !reduce ? new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (!e.isIntersecting) return;
+      if (e.target.__onIn) e.target.__onIn();
+      e.target.getBoundingClientRect();
       e.target.classList.add('in');
       io.unobserve(e.target);
-      if (e.target.__onIn) e.target.__onIn();
     });
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }) : null;
 
@@ -60,31 +61,48 @@
     reveal(sec.querySelectorAll('ol > li'), 0.09);
   });
 
-  /* ---------- полосы прогресса заполняются при появлении ---------- */
+  /* ---------- набегание чисел (ease-out, синхронно с полосой) ---------- */
+  var EASE = 'cubic-bezier(.33,1,.68,1)';            /* = easeOutCubic */
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
+  function randDur() { return 5000 + Math.random() * 3000; }  /* 5–8 с, своя для каждой */
+  function counter(el) {
+    var txt = el.textContent.trim(), m = /^(\d[\d\s]*)(%?)$/.exec(txt);
+    if (!m) return null;
+    var target = parseInt(m[1].replace(/\s/g, ''), 10);
+    el.setAttribute('aria-label', txt); el.style.fontVariantNumeric = 'tabular-nums';
+    el.textContent = '0' + m[2];
+    return function (dur) {
+      var t0 = performance.now();
+      (function tick(t) {
+        var p = Math.min(1, (t - t0) / dur);
+        el.textContent = p < 1 ? Math.round(target * easeOut(p)) + m[2] : txt;
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+      setTimeout(function () { el.textContent = txt; }, dur + 500);
+    };
+  }
+
+  /* ---------- полосы прогресса: каждая со своей случайной длительностью ---------- */
   document.querySelectorAll('div[style*="height: 8px; background: #F2B84B"]').forEach(function (bar) {
+    if (reduce || !io) return;
+    var row = bar.parentElement && bar.parentElement.previousElementSibling;
+    var lab = row ? Array.prototype.filter.call(row.querySelectorAll('span'), function (s) { return /^\d+%$/.test(s.textContent.trim()); })[0] : null;
+    var run = lab ? counter(lab) : null;
     bar.classList.add('bar-fill');
-    if (!io) { bar.classList.add('in'); return; }
+    bar.__onIn = function () {
+      var d = randDur();
+      bar.style.transition = 'transform ' + Math.round(d) + 'ms ' + EASE;
+      if (run) run(d);
+    };
     io.observe(bar);
   });
 
   /* ---------- счётчики в плитках (87%, 1285) ---------- */
   document.querySelectorAll('.tile-v').forEach(function (el) {
-    var txt = el.textContent.trim();
-    var m = /^(\d[\d\s]*)(%?)$/.exec(txt);
-    if (!m || reduce || !io) return;
-    var target = parseInt(m[1].replace(/\s/g, ''), 10);
-    el.setAttribute('aria-label', txt);
-    el.style.fontVariantNumeric = 'tabular-nums';
-    el.textContent = '0' + m[2];
-    el.__onIn = function () {
-      var t0 = performance.now(), dur = 1300;
-      (function tick(t) {
-        var p = Math.min(1, (t - t0) / dur), k = 1 - Math.pow(1 - p, 3);
-        el.textContent = (p < 1 ? Math.round(target * k) : txt.replace(/%$/, '').trim()) + m[2];
-        if (p < 1) requestAnimationFrame(tick); else el.textContent = txt;
-      })(t0);
-      setTimeout(function () { el.textContent = txt; }, dur + 400);
-    };
+    if (reduce || !io) return;
+    var run = counter(el);
+    if (!run) return;
+    el.__onIn = function () { run(randDur()); };
     io.observe(el);
   });
 

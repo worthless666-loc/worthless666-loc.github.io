@@ -22,7 +22,7 @@ a{color:var(--acc)}a:hover{color:var(--acc-hi)}
   transform:translate3d(var(--wx,0px),var(--wy,0px),0) scale(var(--ws,1));transform-origin:center;
   animation:winIn .7s var(--ease) both}
 @keyframes winIn{from{opacity:0;transform:translate3d(0,24px,0) scale(calc(var(--ws,1) * .97))}}
-.win::before{content:"";position:absolute;z-index:0;left:-200px;top:-260px;width:620px;height:520px;pointer-events:none;
+.win::before{content:"";position:absolute;z-index:1;left:-200px;top:-260px;width:620px;height:520px;pointer-events:none;
   background:radial-gradient(closest-side,rgba(255,255,255,.06),transparent)}
 .embed .stage{padding:0}.embed .stage::before,.embed .stage::after{display:none}
 .embed .win{width:100vw;height:100vh;border:0;border-radius:0;box-shadow:none;transform:none;animation:none}
@@ -318,6 +318,79 @@ a:hover .arr,.btn:hover .arr{transform:translateX(4px)}
 .dlg h2{margin:0 0 8px;font:500 19px/1.3 var(--f-head)}
 .dlg p{margin:0;color:var(--text-2);font-size:14px}
 .dlg-b{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+
+/* ---------- фон окна под выбранную игру ---------- */
+.wbgw{position:absolute;z-index:0;inset:0;overflow:hidden;overflow:clip;border-radius:inherit;pointer-events:none}
+.win{overflow:clip}
+.wbg{position:absolute;z-index:0;inset:-70px;background:center/cover no-repeat;filter:blur(46px) saturate(1.25);opacity:0;transition:opacity 1s var(--ease);pointer-events:none;transform:translateZ(0)}
+.wbg.on{opacity:.5}
+.wshade{position:absolute;z-index:0;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,22,.62),rgba(14,17,22,.86) 55%,rgba(14,17,22,.94))}
+
+/* ---------- заставка ---------- */
+.splash{position:absolute;z-index:9;inset:0;display:grid;place-items:center;background:var(--bg);border-radius:inherit;opacity:0;pointer-events:none}
+.splash.go{animation:spl .95s var(--ease) both}
+@keyframes spl{0%,58%{opacity:1}100%{opacity:0}}
+.splash-l{font:700 40px/1 var(--f-head);letter-spacing:-.01em}
+.splash.go .splash-l{animation:splL .5s var(--ease) both}
+@keyframes splL{from{opacity:0;transform:translate3d(0,10px,0) scale(.96)}}
+.splash-l i{display:inline-block;font-style:normal;color:var(--acc);transform-origin:50% 85%}
+.splash.go .splash-l i{animation:splD .5s var(--spring) .18s both}
+@keyframes splD{from{transform:scale(0)}}
+
+/* ---------- «игра обновилась» / «ждём перевод», ссылки ---------- */
+.err.warn .err-ic{background:var(--acc-soft);color:var(--acc);animation:ckPop .6s var(--spring) both}
+.err.warn h3{color:var(--acc-soft-text)}
+.act[data-s=reinstall],.act[data-s=wait]{border-color:rgba(242,184,75,.4)}
+.act[data-s=reinstall]{--ag:1}
+.lk{align-self:flex-start;margin-top:8px;padding:0;border:0;background:none;color:var(--acc);font-weight:600;font-size:13px;cursor:pointer}
+.lk:hover{color:var(--acc-hi)}.lk:hover .arr{transform:translateX(4px)}
+
+/* ---------- окна «Что нового» и «Нашли ошибку?» ---------- */
+.dlg h2.big{margin-top:12px;font-size:24px}
+.nl{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.nl li{position:relative;padding-left:20px;font-size:14px;color:var(--text);animation:apIn .5s var(--ease) both;animation-delay:calc(var(--i) * 80ms + .1s)}
+.nl li::before{content:"";position:absolute;left:3px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.dlg-b.row{flex-direction:row}.dlg-b.row .btn{flex:1}
+.tpl{margin:14px 0 0;padding:12px 14px;border-radius:10px;background:#0E1116;border:1px solid #222733;color:#C9C6BF;font:500 12px/1.6 ui-monospace,"Cascadia Mono",Consolas,monospace;white-space:pre-wrap}
+
+/* ---------- каталог: игра в работе ---------- */
+.cat-g{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pill.work{background:var(--acc-soft);color:var(--acc-soft-text)}
+.cc.wip .cc-art{filter:saturate(.55) brightness(.8)}
+.segs{display:flex;gap:4px;margin-top:6px}
+.segs i{position:relative;flex:1;height:6px;border-radius:999px;background:#262B36;overflow:hidden}
+.segs i.on{background:var(--acc)}
+.segs i.part::after{content:"";position:absolute;inset:0;background:var(--acc);transform-origin:0 50%;transform:scaleX(var(--p,.4));border-radius:999px}
+.segs i.part::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:barRun 1.8s linear infinite}
+.cc-steam.dim{color:var(--muted);font-weight:500}
+.cc.soon{grid-column:1/-1;flex-direction:row;align-items:center;gap:18px;padding:16px 18px}
+.cc.soon h3{margin:0;white-space:nowrap}.cc.soon p{flex:1}.cc.soon .btn{margin:0;white-space:nowrap}
+
+/* ---------- галочка на первом запуске ---------- */
+.empty-in{min-height:400px}
+.chk{display:inline-flex;align-items:center;gap:10px;margin-top:18px;padding:0;border:0;background:none;color:var(--text);font-size:13px;font-weight:500;cursor:pointer}
+.chk-b{width:20px;height:20px;border-radius:6px;border:1.5px solid #3A404D;display:grid;place-items:center;transition:background .25s,border-color .25s}
+.chk-b::after{content:"✓";font-size:13px;font-weight:700;color:var(--acc-ink);transform:scale(0);transition:transform .35s var(--spring)}
+.chk[aria-checked=true] .chk-b{background:var(--acc);border-color:var(--acc)}
+.chk[aria-checked=true] .chk-b::after{transform:none}
+.chk:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
+.chk-n{color:var(--muted-2);font-size:12px;margin-top:4px}
+
+/* ---------- макет уведомления Windows (вне окна) ---------- */
+.wn{position:fixed;z-index:30;right:16px;bottom:16px;width:340px;padding:14px 16px 12px;border-radius:8px;background:#2B2B2B;border:1px solid #3F3F3F;color:#fff;font:400 13px/1.45 "Segoe UI",var(--f-body);box-shadow:0 16px 40px rgba(0,0,0,.6);
+  transform:translate3d(calc(100% + 24px),0,0);opacity:0;pointer-events:none;transition:transform .45s var(--ease),opacity .3s}
+.wn.show{transform:none;opacity:1;pointer-events:auto}
+.wn-h{display:flex;align-items:center;gap:8px;color:#C8C8C8;font-size:12px;margin-bottom:8px}
+.wn-h span:nth-child(2){flex:1}
+.wn-ic{width:18px;height:18px;border-radius:4px;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;font:800 8px/1 var(--f-head)}
+.wn-x{border:0;background:none;color:#C8C8C8;cursor:pointer;font-size:12px;padding:2px 4px}
+.wn strong{display:block;font-weight:600;font-size:14px}
+.wn p{margin:2px 0 12px;color:#D0D0D0}
+.wn-b{display:flex;gap:8px}
+.wn-b button{flex:1;padding:7px 0;border-radius:4px;border:1px solid #4A4A4A;background:#383838;color:#fff;font:inherit;cursor:pointer}
+.wn-b button:hover{background:#454545}
+.wn-cap{position:absolute;right:0;bottom:calc(100% + 6px);font:500 11px var(--f-body);color:var(--muted-2)}
+.embed .wn{display:none}
 
 /* «Играть» и метка статуса */
 .btn .pl{flex:none}

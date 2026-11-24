@@ -17,7 +17,8 @@
       path: 'D:\\SteamLibrary\\steamapps\\common\\Psycho-Sleuth', credit: 'Арт: © PHOSEPO',
       pct: 90, ver: '1.3', next: '1.4', date: '23.11.2026',
       url: 'https://perevedeno.com/psycho-sleuth.html',
-      news: ['Весь сюжет: 5 глав, ≈24 700 строк', 'Исследование локаций и интерфейс', 'Правки после вычитки по главам']
+      news: ['Весь сюжет: 5 глав, ≈24 700 строк', 'Исследование локаций и интерфейс', 'Правки после вычитки по главам'],
+      nextNews: ['Правки по итогам вычитки последних глав', 'Исправлены переносы строк в длинных репликах', 'Уточнены термины и имена по глоссарию']
     },
     fa: {
       name: 'The False Alice', tag: 'демо', kind: 'Steam · ПК · демо', status: 'Демо готово',
@@ -26,13 +27,16 @@
       path: 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\The False Alice Demo', credit: 'Арт: © VISUAL ARTS',
       pct: 87, ver: '1.0', next: '1.1', date: '24.11.2026',
       url: 'https://perevedeno.com/false-alice.html',
-      news: ['Весь сюжет демо: 5 сцен, 1285 строк', 'Имена персонажей и текстовое меню', 'Родная кириллица в шрифте игры']
+      news: ['Весь сюжет демо: 5 сцен, 1285 строк', 'Имена персонажей и текстовое меню', 'Родная кириллица в шрифте игры'],
+      nextNews: ['Исправлены опечатки из сообщений игроков', 'Поправлены переносы в длинных репликах']
     }
   };
+  /* Игра «в работе» для каталога. Число глав и прогресс — ЗАГЛУШКА, заменить реальными данными из манифеста. */
+  var WIP = { name: 'The False Alice', tag: 'полная версия', sub: 'Полная игра выходит 26.11 — переводим дальше демо', art: 'img/art-false-alice.jpg', total: 6, done: 2, part: .4 };
   var ORDER = ['ps', 'fa'];
   /* lib — что игрок добавил в библиотеку; game — выбранная игра (null, если библиотека пуста) */
   var S = { lib: ['ps', 'fa'], game: 'ps', screen: 'lib', st: { ps: 'installed', fa: 'none' }, prog: { ps: 0, fa: 0 },
-    ver: { ps: GAMES.ps.ver, fa: GAMES.fa.ver }, morph: false };
+    ver: { ps: GAMES.ps.ver, fa: GAMES.fa.ver }, morph: false, notify: false };
   var timers = { inst: null, tour: [] };
 
   var win = $('#win'), glist = $('#glist'), gsel = $('#gsel'), toast = $('#toast'), dlg = $('#dlg');
@@ -52,7 +56,8 @@
       case 'update': return ['upd', 'Доступно ' + g.next];
       case 'installing': return ['run', 'Установка… ' + Math.round(S.prog[id]) + '%'];
       case 'err-nf': return ['err', 'Игра не найдена'];
-      case 'err-ver': return ['err', 'Нужна проверка'];
+      case 'reinstall': return ['upd', 'Поставить заново'];
+      case 'wait': return ['', 'Ждём перевод'];
       default: return ['', 'Не установлено'];
     }
   }
@@ -112,9 +117,12 @@
     } else if (s === 'err-nf') {
       h = '<div class="err"><span class="err-ic">!</span><div><h3>Игра не найдена</h3><p>Не нашли ' + esc(g.name) + ' в библиотеках Steam. Если игра стоит в другом месте — укажите её папку вручную.</p>' +
         '<div class="act-row"><button type="button" class="btn btn-primary btn-m">Указать папку</button><button type="button" class="btn btn-ghost btn-m">Проверить снова</button></div></div></div>';
-    } else if (s === 'err-ver') {
-      h = '<div class="err"><span class="err-ic">!</span><div><h3>Эта версия игры пока не поддерживается</h3><p>Похоже, игра обновилась в Steam. Перевод для новой сборки ещё не готов — файлы игры мы не трогали.</p>' +
-        '<div class="act-row"><button type="button" class="btn btn-ghost btn-m">Проверить снова</button><a class="btn btn-ghost btn-m" href="' + TG + '" target="_blank" rel="noopener">Новости в Telegram <span class="arr">↗</span></a></div></div></div>';
+    } else if (s === 'reinstall') {
+      h = '<div class="err warn"><span class="err-ic">↻</span><div><h3>Игра обновилась — перевод нужно поставить заново</h3><p>Steam обновил ' + esc(g.name) + ', и русский текст слетел. Новая сборка уже поддерживается — это один клик.</p>' +
+        '<div class="act-row"><button type="button" class="btn btn-primary btn-m">Поставить перевод заново</button><button type="button" class="btn btn-ghost btn-m">' + PLAY + 'Играть на английском</button></div></div></div>';
+    } else if (s === 'wait') {
+      h = '<div class="err warn"><span class="err-ic">…</span><div><h3>Ждём обновление перевода</h3><p>Игра обновилась в Steam, а перевод для новой сборки ещё не готов. Файлы игры мы не трогали — пока можно играть на английском. Когда перевод выйдет, лаунчер сообщит.</p>' +
+        '<div class="act-row"><button type="button" class="btn btn-primary btn-m">' + PLAY + 'Играть на английском</button><a class="btn btn-ghost btn-m" href="' + TG + '" target="_blank" rel="noopener">Новости в Telegram <span class="arr">↗</span></a></div></div></div>';
     }
     return '<div class="act-in swap">' + h + '</div>';
   }
@@ -142,6 +150,7 @@
       g.news.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul></div>' +
       '<div class="side-links ap" style="--i:8"><a href="' + g.url + '" target="_blank" rel="noopener">Страница игры на сайте <span class="arr">↗</span></a>' +
       '<small>Скриншоты, вопросы и команда перевода</small>' +
+      '<button type="button" class="lk" data-bug="' + id + '">Нашли ошибку в переводе? <span class="arr">→</span></button>' +
       '<button type="button" class="rm" data-remove="' + id + '">Убрать из библиотеки</button></div></div></div>';
   }
 
@@ -156,10 +165,24 @@
       '<div class="found-row"><span class="gi-cov" style="background-image:url(' + g.cover + ')"></span><span class="found-n"><strong>' + esc(g.name) + '</strong><small>Перевод ' + g.pct + '% · версия ' + g.ver + '</small></span>' +
       '<button type="button" class="btn btn-primary btn-m" data-add="ps">Добавить в библиотеку</button></div>' +
       '<button type="button" class="btn btn-ghost btn-m" data-go="cat">Открыть каталог <span class="arr">→</span></button>' +
+      '<button type="button" class="chk" role="checkbox" aria-checked="true"><span class="chk-b"></span>Запускать вместе с Windows и сворачивать в трей</button>' +
+      '<small class="chk-n">Так лаунчер сам сообщит о новых версиях. Можно выключить в настройках.</small>' +
       '</div></div></div>';
   }
 
   /* ---------- каталог ---------- */
+  function notifyHTML() {
+    return S.notify ? '<span class="st-tag morph">Сообщим в лаунчере <span class="ck">✓</span></span>'
+      : '<button type="button" class="btn btn-ghost btn-m" data-notify>Сообщить, когда выйдет</button>';
+  }
+  function wipHTML(n) {
+    var seg = '';
+    for (var i = 0; i < WIP.total; i++) seg += '<i' + (i < WIP.done ? ' class="on"' : i === WIP.done ? ' class="part" style="--p:' + WIP.part + '"' : '') + '></i>';
+    return '<article class="cc wip ap" style="--i:' + n + '"><div class="cc-art" style="background-image:url(' + WIP.art + ')"><span class="pill work">В работе</span></div>' +
+      '<div class="cc-b"><h3>' + esc(WIP.name) + ' <small>' + WIP.tag + '</small></h3><p>' + esc(WIP.sub) + '</p>' +
+      '<div class="cc-pr"><span>Главы</span><span>' + WIP.done + ' из ' + WIP.total + '</span></div><div class="segs">' + seg + '</div>' +
+      '<div class="cc-steam dim">Сроков не обещаем — сообщим, когда выйдет</div><div class="cc-act" data-notify-box>' + notifyHTML() + '</div></div></article>';
+  }
   function catHTML() {
     var cards = ORDER.map(function (id, n) {
       var g = GAMES[id], inl = inLib(id), act;
@@ -177,11 +200,22 @@
         '<div class="cc-steam">✓ Есть у вас в Steam</div><div class="cc-act">' + act + '</div></div></article>';
     }).join('');
     return '<div class="cat-w"><div class="cat-h"><div><h1 class="ap" style="--i:0">Каталог</h1><p class="ap" style="--i:1">Все наши переводы. Добавьте новеллу — она появится в библиотеке слева.</p></div>' +
-      '<span class="cat-n ap" style="--i:1">' + ORDER.length + ' перевода</span></div><div class="cat-g">' + cards +
-      '<article class="cc soon ap" style="--i:' + (ORDER.length + 2) + '"><span class="pill dim">Скоро</span><h3>Что переводить дальше?</h3>' +
-      '<p>Следующую новеллу выбираем вместе. Предложите игру без русского языка — посмотрим движок и возьмём в работу, если получится.</p>' +
+      '<span class="cat-n ap" style="--i:1">' + ORDER.length + ' перевода · 1 в работе</span></div><div class="cat-g">' + cards +
+      wipHTML(ORDER.length + 2) +
+      '<article class="cc soon ap" style="--i:' + (ORDER.length + 3) + '"><span class="pill dim">Скоро</span><h3>Что переводить дальше?</h3>' +
+      '<p>Предложите новеллу без русского языка — посмотрим движок и возьмём в работу, если получится.</p>' +
       '<a class="btn btn-ghost btn-m" href="' + TG + '" target="_blank" rel="noopener">Предложить новеллу <span class="arr">↗</span></a></article>' +
       '</div></div>';
+  }
+
+  /* ---------- фон окна: размытый арт выбранной игры ---------- */
+  var bg = { cur: null, n: 0 };
+  function paintBg() {
+    var id = S.game || null; if (id === bg.cur) return;
+    bg.cur = id;
+    var L = $$('.wbg', win), a = L[bg.n], b = L[bg.n = 1 - bg.n];
+    if (id) { b.style.backgroundImage = 'url(' + GAMES[id].art + ')'; b.classList.add('on'); }
+    a.classList.remove('on');
   }
 
   /* ---------- переходы между экранами ---------- */
@@ -205,7 +239,7 @@
     if (anim === false) { if (html != null) el.innerHTML = html; el.classList.remove('leave'); el.hidden = false; }
     else swapScreen(el, html);
     if (S.screen === 'lib' && S.game && busy(S.game)) syncProgress(S.game);
-    paintSide(); paintDemo();
+    paintSide(); paintDemo(); paintBg();
   }
   /* Меняется только блок действия — без перерисовки всей страницы */
   function renderAct() {
@@ -294,6 +328,30 @@
     dlg.hidden = false; dlg.classList.remove('hide'); void dlg.offsetWidth; dlg.classList.add('show');
     var f = $('[data-dlg=cancel]', dlg); if (f) f.focus({ preventScroll: true });
   }
+  function showDlg(html) {
+    $('#dlgC').innerHTML = html;
+    dlg.hidden = false; dlg.classList.remove('hide'); void dlg.offsetWidth; dlg.classList.add('show');
+    var f = $('[data-dlg=cancel]', dlg); if (f) f.focus({ preventScroll: true });
+  }
+  function bugText(id) { return 'Игра: ' + GAMES[id].name + (GAMES[id].tag ? ' (' + GAMES[id].tag + ')' : '') + '\nВерсия перевода: ' + S.ver[id] + '\nГде ошибка (глава, сцена, реплика): \nСкриншот: приложите к сообщению'; }
+  function bugDlg(id) {
+    showDlg('<h2 id="dlgT">Нашли ошибку в переводе?</h2><p>Напишите нам в Telegram — исправим в следующей версии. Шаблон уже заполнен, останется приложить скриншот.</p>' +
+      '<pre class="tpl">' + esc(bugText(id)) + '</pre>' +
+      '<div class="dlg-b"><a class="btn btn-primary btn-m" href="' + TG + '" target="_blank" rel="noopener" data-copy="' + id + '">Скопировать и открыть Telegram <span class="arr">↗</span></a>' +
+      '<button type="button" class="btn btn-ghost btn-m" data-dlg="cancel">Закрыть</button></div>');
+  }
+  function newsDlg(id) {
+    var g = GAMES[id];
+    showDlg('<span class="badge">Новая версия</span><h2 id="dlgT" class="big">Что нового в ' + g.next + '</h2><p>' + esc(g.name) + ' · сейчас стоит ' + g.ver + '</p>' +
+      '<ul class="nl">' + g.nextNews.map(function (n, i) { return '<li style="--i:' + (i + 1) + '">' + esc(n) + '</li>'; }).join('') + '</ul>' +
+      '<div class="dlg-b row"><button type="button" class="btn btn-primary btn-m" data-dlg="update">Обновить до ' + g.next + '</button>' +
+      '<button type="button" class="btn btn-ghost btn-m" data-dlg="cancel">Позже</button></div>');
+  }
+  /* уведомление Windows из трея (макет, вне окна) и заставка */
+  var wn = $('#winnotif'), wnT;
+  function showWn() { if (!wn) return; wn.classList.remove('show'); void wn.offsetWidth; wn.classList.add('show'); clearTimeout(wnT); wnT = setTimeout(hideWn, 9000); }
+  function hideWn() { if (wn) wn.classList.remove('show'); clearTimeout(wnT); }
+  function splash() { var s = $('#splash'); s.classList.remove('go'); void s.offsetWidth; s.classList.add('go'); }
   function closeDlg() {
     if (dlg.hidden) return;
     dlg.classList.remove('show');
@@ -325,12 +383,23 @@
     if ((b = t.closest('[data-remove]'))) return openDlg(b.getAttribute('data-remove'));
     if ((b = t.closest('[data-dlg]'))) {
       var k = b.getAttribute('data-dlg');
-      return k === 'cancel' ? closeDlg() : removeGame(b.getAttribute('data-id'), k === 'revert');
+      if (k === 'cancel') return closeDlg();
+      if (k === 'update') { closeDlg(); hideToast(); return setState('updating'); }
+      return removeGame(b.getAttribute('data-id'), k === 'revert');
     }
     if (t === dlg) return closeDlg();
+    if ((b = t.closest('[data-bug]'))) return bugDlg(b.getAttribute('data-bug'));
+    if ((b = t.closest('[data-copy]'))) {
+      try { navigator.clipboard.writeText(bugText(b.getAttribute('data-copy'))); } catch (err) {}
+      return;
+    }
+    if ((b = t.closest('[data-notify]'))) { S.notify = true; b.parentNode.innerHTML = notifyHTML(); return; }
+    if ((b = t.closest('.chk'))) { b.setAttribute('aria-checked', b.getAttribute('aria-checked') === 'true' ? 'false' : 'true'); return; }
+    if (t.closest('[data-toast-news]')) { hideToast(); return openNews(); }
     if ((b = t.closest('.sw'))) { b.setAttribute('aria-checked', b.getAttribute('aria-checked') === 'true' ? 'false' : 'true'); return; }
     if (t.closest('[data-toast-x]')) return hideToast();
     if (t.closest('[data-news]')) {
+      if (S.game && S.st[S.game] === 'update') return newsDlg(S.game);
       var n = $('.news', lib); if (!n) return;
       n.classList.remove('flash'); void n.offsetWidth; n.classList.add('flash');
       setTimeout(function () { n.classList.remove('flash'); }, 900);
@@ -364,6 +433,15 @@
   }
   addEventListener('resize', fit);
 
+  function openNews() {
+    if (!S.game) { S.lib = ['ps']; S.game = 'ps'; buildSide('ps'); }
+    if (S.st[S.game] !== 'update' || S.screen !== 'lib') setState('update');
+    newsDlg(S.game);
+  }
+  if (wn) wn.addEventListener('click', function (e) {
+    if (e.target.closest('[data-wn-go]')) { hideWn(); openNews(); } else if (e.target.closest('button')) hideWn();
+  });
+
   /* ---------- панель «Демо» ---------- */
   function paintDemo() {
     $$('.demo .dg[data-g]').forEach(function (g) {
@@ -374,14 +452,14 @@
   }
   function stopTour() { timers.tour.forEach(clearTimeout); timers.tour = []; $('[data-act=tour]').setAttribute('aria-pressed', 'false'); }
   function setLib(n) {
-    closeDlg(); stopInstall();
+    closeDlg(); stopInstall(); if (n === 0) S.notify = false;
     S.lib = ORDER.slice(0, n);
     S.game = inLib(S.game) ? S.game : (S.lib[0] || null);
     if (n === 0) { S.st = { ps: 'none', fa: 'none' }; S.ver = { ps: GAMES.ps.ver, fa: GAMES.fa.ver }; }
     S.screen = 'lib'; buildSide(); render();
   }
   function setState(v) {
-    stopInstall();
+    stopInstall(); closeDlg();
     if (!S.game) { S.lib = ['ps']; S.game = 'ps'; buildSide('ps'); }
     var id = S.game;
     if (v !== 'installed' && v !== 'updating') S.ver[id] = GAMES[id].ver;
@@ -392,12 +470,16 @@
   $('#demo').addEventListener('click', function (e) {
     var b = e.target.closest('.dc'); if (!b) return;
     var g = b.parentNode.getAttribute('data-g'), v = b.getAttribute('data-v'), act = b.getAttribute('data-act');
-    if (act !== 'tour' && act !== 'toast') stopTour();
+    if (act !== 'tour' && act !== 'toast' && act !== 'wn') stopTour();
     if (g === 'lib') setLib(+v);
     else if (g === 'game') { if (!inLib(v)) addGame(v, false); else if (v !== S.game || S.screen !== 'lib') { S.game = v; S.screen = 'lib'; render(); } }
     else if (g === 'screen') go(v);
     else if (g === 'state') setState(v);
     else if (act === 'toast') showToast();
+    else if (act === 'wn') showWn();
+    else if (act === 'news') openNews();
+    else if (act === 'bug') { if (!S.game) setState('installed'); else if (S.screen !== 'lib') go('lib'); bugDlg(S.game); }
+    else if (act === 'splash') splash();
     else if (act === 'tour') {
       if (timers.tour.length) { stopTour(); return; }
       b.setAttribute('aria-pressed', 'true');
@@ -410,7 +492,7 @@
         [27500, function () { go('cat'); }],
         [30500, function () { addGame('fa', true); }],
         [38000, function () { setState('err-nf'); }],
-        [41000, function () { setState('err-ver'); }],
+        [41000, function () { setState('reinstall'); }],
         [44000, function () { setState('none'); go('set'); }],
         [47500, function () { S.game = 'ps'; S.screen = 'lib'; render(); stopTour(); }]];
       seq.forEach(function (s) { timers.tour.push(setTimeout(s[1], s[0])); });
@@ -423,12 +505,15 @@
     if (/^[012]$/.test(q.get('lib') || '')) { S.lib = ORDER.slice(0, +q.get('lib')); if (!S.lib.length) S.st.ps = 'none'; }
     if (GAMES[q.get('game')] && inLib(q.get('game'))) S.game = q.get('game');
     if (!inLib(S.game)) S.game = S.lib[0] || null;
-    if (S.game && /^(none|installing|installed|update|updating|err-nf|err-ver)$/.test(q.get('state') || '')) S.st[S.game] = q.get('state');
+    if (S.game && /^(none|installing|installed|update|updating|err-nf|reinstall|wait)$/.test(q.get('state') || '')) S.st[S.game] = q.get('state');
     if (/^(set|cat)$/.test(q.get('screen') || '')) S.screen = q.get('screen');
     fit(); buildSide(); render(false);
     Object.keys(SCR).forEach(function (k) { SCR[k].hidden = k !== S.screen; });
     if (S.game && busy(S.game)) runInstall(S.game);
     if (q.get('toast') === '1') setTimeout(showToast, 600);
+    if (q.get('wn') === '1') setTimeout(showWn, 600);
+    if (q.get('dlg') === 'news') openNews(); else if (q.get('dlg') === 'bug' && S.game) bugDlg(S.game);
+    if (q.get('splash') !== '0') splash();
     requestAnimationFrame(moveSel);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { moveSel(); fit(); });
   })();

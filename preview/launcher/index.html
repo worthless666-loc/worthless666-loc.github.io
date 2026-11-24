@@ -6,14 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[Превью] Лаунчер «Переведено.» — макет интерфейса</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="tokens.css?v=3">
-<link rel="stylesheet" href="launcher.css?v=3">
+<link rel="stylesheet" href="tokens.css?v=4">
+<link rel="stylesheet" href="launcher.css?v=4">
 <script>if(/[?&]embed=1\b/.test(location.search))document.documentElement.className='embed';</script>
-<script src="launcher.js?v=3" defer></script>
+<script src="launcher.js?v=4" defer></script>
 </head>
 <body>
 <div class="stage">
 <div class="win" id="win" role="application" aria-label="Переведено. — лаунчер">
+
+<div class="wbgw" aria-hidden="true"><div class="wbg"></div><div class="wbg"></div><div class="wshade"></div></div>
 
 <header class="tb" id="tb">
 <span class="tb-logo">Переведено<i>.</i></span><span class="tb-sub">· лаунчер</span>
@@ -52,9 +54,14 @@
 <div class="card ap" style="--i:2">
 <h2>Обновления</h2>
 <div class="row"><div class="row-t"><strong>Проверять обновления перевода при запуске</strong><span>Лаунчер сам скажет, когда выйдет новая версия</span></div><button type="button" class="sw" role="switch" aria-checked="true" aria-label="Проверять обновления при запуске"></button></div>
-<div class="row"><div class="row-t"><strong>Показывать уведомления</strong><span>Всплывающее окно «Вышла версия…»</span></div><button type="button" class="sw" role="switch" aria-checked="true" aria-label="Показывать уведомления"></button></div>
+<div class="row"><div class="row-t"><strong>Уведомлять об обновлениях игр из моей библиотеки</strong><span>Только ваши игры и те, где вы нажали «Сообщить, когда выйдет»</span></div><button type="button" class="sw" role="switch" aria-checked="true" aria-label="Уведомлять об обновлениях игр из моей библиотеки"></button></div>
 </div>
 <div class="card ap" style="--i:3">
+<h2>Запуск</h2>
+<div class="row"><div class="row-t"><strong>Запускать вместе с Windows</strong><span>Лаунчер стартует свёрнутым и сам проверяет обновления</span></div><button type="button" class="sw" role="switch" aria-checked="true" aria-label="Запускать вместе с Windows"></button></div>
+<div class="row"><div class="row-t"><strong>Сворачивать в трей при закрытии</strong><span>Крестик прячет окно к часам, выход — через значок в трее</span></div><button type="button" class="sw" role="switch" aria-checked="true" aria-label="Сворачивать в трей"></button></div>
+</div>
+<div class="card ap" style="--i:4">
 <h2>О программе</h2>
 <div class="about"><span class="about-logo">RU</span><div><strong>Переведено. · лаунчер</strong><p>Версия 0.1 (макет). Фанатские переводы визуальных новелл в один клик. Файлы игр не раздаём — ставим только наш перевод поверх вашей копии из Steam.</p></div></div>
 <div class="row"><div class="row-t"><strong>Новости и вопросы</strong><span>Новые версии и выбор следующей новеллы</span></div><a class="btn btn-ghost btn-s" href="https://t.me/perevedeno_w" target="_blank" rel="noopener">Telegram <span class="arr">↗</span></a><a class="btn btn-ghost btn-s" href="https://perevedeno.com/" target="_blank" rel="noopener">perevedeno.com <span class="arr">↗</span></a></div>
@@ -64,11 +71,13 @@
 </main>
 </div>
 
+<div class="splash" id="splash" aria-hidden="true"><span class="splash-l">Переведено<i>.</i></span></div>
+
 <div class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgT" hidden><div class="dlg-c" id="dlgC"></div></div>
 
 <div class="toast" id="toast" role="status" aria-live="polite">
 <span class="toast-ic">1.4</span>
-<div class="toast-t"><strong>Вышла версия 1.4</strong><span>Psycho-Sleuth · русский перевод</span><button type="button" class="btn btn-primary btn-s" data-toast-go>Обновить <span class="arr">→</span></button></div>
+<div class="toast-t"><strong>Вышла версия 1.4</strong><span>Psycho-Sleuth · русский перевод</span><button type="button" class="btn btn-primary btn-s" data-toast-news>Что нового <span class="arr">→</span></button></div>
 <button type="button" class="toast-x" data-toast-x aria-label="Закрыть уведомление">✕</button>
 <span class="toast-bar"></span>
 </div>
@@ -76,13 +85,21 @@
 </div>
 </div>
 
+<aside class="wn" id="winnotif" aria-label="Макет уведомления Windows">
+<div class="wn-h"><span class="wn-ic">RU</span><span>Переведено. · лаунчер</span><button type="button" class="wn-x" aria-label="Закрыть">✕</button></div>
+<strong>Вышла версия 1.4</strong>
+<p>Psycho-Sleuth · русский перевод. Обновить можно в один клик.</p>
+<div class="wn-b"><button type="button" data-wn-go>Что нового</button><button type="button">Позже</button></div>
+<span class="wn-cap">макет уведомления Windows из трея</span>
+</aside>
+
 <aside class="demo" id="demo" aria-label="Демо-состояния (только в макете)">
 <span class="demo-l">Демо</span>
 <div class="dg" data-g="lib"><span>Библиотека:</span><button type="button" class="dc" data-v="0">Пустая (первый запуск)</button><button type="button" class="dc" data-v="1">Одна игра</button><button type="button" class="dc" data-v="2">Обе</button></div>
 <div class="dg" data-g="game"><span>Игра:</span><button type="button" class="dc" data-v="ps">Psycho-Sleuth</button><button type="button" class="dc" data-v="fa">False Alice</button></div>
 <div class="dg" data-g="screen"><span>Экран:</span><button type="button" class="dc" data-v="lib">Библиотека</button><button type="button" class="dc" data-v="cat">Каталог</button><button type="button" class="dc" data-v="set">Настройки</button></div>
-<div class="dg" data-g="state"><span>Кнопка:</span><button type="button" class="dc" data-v="none">Не установлено</button><button type="button" class="dc" data-v="installing">Установка</button><button type="button" class="dc" data-v="installed">Установлено · «Играть»</button><button type="button" class="dc" data-v="update">Есть обновление</button><button type="button" class="dc" data-v="updating">Обновляется</button><button type="button" class="dc" data-v="err-nf">Игра не найдена</button><button type="button" class="dc" data-v="err-ver">Версия не та</button></div>
-<div class="dg"><button type="button" class="dc" data-act="toast">Тост «1.4»</button><button type="button" class="dc play" data-act="tour">▶ Показ по очереди</button></div>
+<div class="dg" data-g="state"><span>Кнопка:</span><button type="button" class="dc" data-v="none">Не установлено</button><button type="button" class="dc" data-v="installing">Установка</button><button type="button" class="dc" data-v="installed">Установлено · «Играть»</button><button type="button" class="dc" data-v="update">Есть обновление</button><button type="button" class="dc" data-v="updating">Обновляется</button><button type="button" class="dc" data-v="err-nf">Игра не найдена</button><button type="button" class="dc" data-v="reinstall">Игра обновилась</button><button type="button" class="dc" data-v="wait">Ждём перевод</button></div>
+<div class="dg"><span>Показать:</span><button type="button" class="dc" data-act="splash">Заставка</button><button type="button" class="dc" data-act="toast">Тост «1.4»</button><button type="button" class="dc" data-act="wn">Уведомление Windows</button><button type="button" class="dc" data-act="news">«Что нового в 1.4»</button><button type="button" class="dc" data-act="bug">«Нашли ошибку?»</button><button type="button" class="dc play" data-act="tour">▶ Показ по очереди</button></div>
 </aside>
 </body>
 </html>

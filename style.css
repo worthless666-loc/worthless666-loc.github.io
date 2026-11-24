@@ -202,3 +202,46 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
 .lb-count{position:absolute;z-index:2;left:22px;top:28px;color:#C9C6BF;font-size:14px;letter-spacing:.06em;font-variant-numeric:tabular-nums}
 @media (max-width:640px){.lb-prev,.lb-next{display:none}.lb-img{border-radius:6px}}
 @media (prefers-reduced-motion:reduce){.gal{scroll-behavior:auto}.gal-link,.gal-link img{transform:none!important}}
+
+/* ---------- «Как установить»: шаги на линии ---------- */
+.steps{position:relative;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.step{position:relative;display:flex;flex-direction:column;gap:16px}
+.step-num{position:relative;z-index:1;width:48px;height:48px;border-radius:50%;border:2px solid var(--acc);background:#0E1116;
+  display:flex;align-items:center;justify-content:center;font-family:Unbounded,sans-serif;font-weight:700;font-size:16px;color:var(--acc);overflow:hidden;flex:none}
+.step-num::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--acc);transform:scale(1)}
+.step-num .n1,.step-num .n2{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.step-num .n1{color:var(--acc);opacity:0}.step-num .n2{color:#14110A;opacity:1}
+/* линия к следующему шагу: серая дорожка + жёлтое заполнение */
+.step:not(:last-child)::before,.step:not(:last-child)::after{content:"";position:absolute;top:23px;left:56px;width:calc(100% - 44px);height:2px;border-radius:2px}
+.step:not(:last-child)::before{background:#262B36}
+.step:not(:last-child)::after{background:linear-gradient(90deg,var(--acc),rgba(242,184,75,.55));transform-origin:left center;transform:scaleX(1)}
+.step-card{flex:1;background:#161A22;border:1px solid #262B36;border-radius:14px;padding:22px 22px 24px;display:flex;flex-direction:column;gap:8px;
+  transition:transform .35s var(--ease),border-color .3s}
+.step-card:hover{transform:translateY(-3px);border-color:rgba(242,184,75,.55)}
+.step-ico{width:30px;height:30px;color:var(--acc);margin-bottom:6px;flex:none}
+.step-card strong{font-size:18px}
+.step-card span{color:#B5B2AA}
+/* анимация только при JS: исходное состояние «до» */
+.js .steps:not(.in) .step-num::before{transform:scale(0)}
+.js .steps:not(.in) .step-num .n1{opacity:1}
+.js .steps:not(.in) .step-num .n2{opacity:0}
+.js .steps:not(.in) .step:not(:last-child)::after{transform:scaleX(0)}
+.js .steps:not(.in) .step-card{opacity:.35;transform:translateY(12px)}
+.js .steps .step-num::before{transition:transform .5s var(--spring) calc(.15s + var(--i) * .55s)}
+.js .steps .step-num .n1,.js .steps .step-num .n2{transition:opacity .3s ease calc(.25s + var(--i) * .55s)}
+.js .steps .step:not(:last-child)::after{transition:transform .5s cubic-bezier(.45,0,.25,1) calc(.4s + var(--i) * .55s)}
+.js .steps .step-card{transition:opacity .6s var(--ease) calc(.1s + var(--i) * .55s),transform .6s var(--ease) calc(.1s + var(--i) * .55s),border-color .3s}
+.js .steps.in .step-card:hover{transform:translateY(-3px);transition-delay:0s}
+@media (max-width:900px){
+  .steps{grid-template-columns:minmax(0,1fr);gap:18px}
+  .step{display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;align-items:start}
+  .step:not(:last-child)::before,.step:not(:last-child)::after{top:56px;left:23px;width:2px;height:calc(100% - 44px)}
+  .step:not(:last-child)::after{background:linear-gradient(180deg,var(--acc),rgba(242,184,75,.55));transform-origin:center top;transform:scaleY(1)}
+  .js .steps:not(.in) .step:not(:last-child)::after{transform:scaleY(0)}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .steps:not(.in) .step-num::before{transform:none}
+  .js .steps:not(.in) .step-num .n1{opacity:0}.js .steps:not(.in) .step-num .n2{opacity:1}
+  .js .steps:not(.in) .step:not(:last-child)::after{transform:none}
+  .js .steps:not(.in) .step-card{opacity:1;transform:none}
+}

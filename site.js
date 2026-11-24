@@ -63,7 +63,7 @@
   }
   document.querySelectorAll('main > section').forEach(function (sec, si) {
     var direct = Array.prototype.filter.call(sec.children, function (c) {
-      return !c.querySelector('article') && !c.classList.contains('tiles') && !c.classList.contains('vt-fa') && !c.classList.contains('vt-ps') && !c.classList.contains('split');
+      return !c.querySelector('article') && !c.classList.contains('tiles') && !c.classList.contains('vt-fa') && !c.classList.contains('vt-ps') && !c.classList.contains('split') && !c.classList.contains('steps');
     });
     reveal(direct, 0.07);
     reveal(sec.querySelectorAll('article'), 0.12);
@@ -95,13 +95,19 @@
   /* страховка: если наблюдатель не сработал, показать то, что уже на экране */
   function failsafe() {
     if (document.visibilityState !== 'visible') return;
-    document.querySelectorAll('.rv:not(.in), .bar-fill:not(.in), .tile-v:not(.in)').forEach(function (el) {
+    document.querySelectorAll('.rv:not(.in), .bar-fill:not(.in), .tile-v:not(.in), .steps:not(.in)').forEach(function (el) {
       var r = el.getBoundingClientRect();
       if (r.top < innerHeight && r.bottom > 0) { if (el.__onIn) el.__onIn(); el.classList.add('in'); if (io) io.unobserve(el); }
     });
   }
   setTimeout(failsafe, 2500);
   document.addEventListener('visibilitychange', function () { setTimeout(failsafe, 1500); });
+
+  /* ---------- «Как установить»: линия рисуется, шаги загораются по очереди ---------- */
+  document.querySelectorAll('.steps').forEach(function (ol) {
+    if (!io) { ol.classList.add('in'); return; }
+    io.observe(ol);
+  });
 
   /* ---------- полосы прогресса: каждая со своей случайной длительностью ---------- */
   document.querySelectorAll('div[style*="height: 8px; background: #F2B84B"]').forEach(function (bar) {

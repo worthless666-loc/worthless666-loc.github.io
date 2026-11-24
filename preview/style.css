@@ -304,7 +304,8 @@ body>div:first-child{
 /* ---------- 404 ---------- */
 .e404{min-height:calc(100vh - 260px);display:flex;flex-direction:column;justify-content:center;gap:22px;max-width:1200px;margin:0 auto;padding:72px 32px 96px;box-sizing:border-box}
 .e404-code{position:relative;display:inline-block;align-self:flex-start;margin:0;font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(96px,22vw,220px);line-height:.9;color:#E8E6E1;letter-spacing:.02em}
-.e404-code::before,.e404-code::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;opacity:0}
+.e404-code{isolation:isolate}
+.e404-code::before,.e404-code::after{content:attr(data-text);position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0}
 .e404-code::before{color:var(--acc);animation:gl1 3.2s steps(1,end) infinite}
 .e404-code::after{color:#5BD1E8;animation:gl2 3.2s steps(1,end) infinite}
 .e404-code .dot{color:var(--acc);display:inline-block;animation:blink 1.1s ease-in-out infinite}

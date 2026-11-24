@@ -11,6 +11,7 @@
     var a = e.target.closest && e.target.closest('a[href]'); if (!a || typeof window.ym !== 'function') return;
     var h = a.getAttribute('href'), goal = '';
     if (/\.zip(\?|$)/.test(h)) goal = /False-Alice/i.test(h) ? 'download-false-alice' : /Psycho-Sleuth/i.test(h) ? 'download-psycho-sleuth' : 'download';
+    else if (a.getAttribute('data-ym-goal')) goal = a.getAttribute('data-ym-goal');
     else if (a.getAttribute('data-goatcounter-click') === 'tg-subscribe') goal = 'tg-subscribe';
     if (goal) { try { window.ym(114653532, 'reachGoal', goal); } catch (err) {} }
   }, true);
@@ -490,4 +491,93 @@
       setTimeout(function () { location.href = a.href; }, 170);
     });
   }
+  /* ---------- тест «Какая ты Алиса?» ---------- */
+  (function () {
+    var box = document.querySelector('[data-quiz]'), src = document.getElementById('quiz-data');
+    if (!box || !src) return;
+    var D; try { D = JSON.parse(src.textContent); } catch (e) { return; }
+    var Q = D.questions, R = D.results, base = box.getAttribute('data-img-base') || 'screens/false-alice/';
+    var step = 0, picks = [], busy = false;
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function swap(html, after) {
+      var old = box.querySelector('.quiz-stage');
+      function put() {
+        var h0 = box.getBoundingClientRect().height;
+        box.innerHTML = html;
+        if (!reduce) {
+          box.style.transition = 'none'; box.style.height = 'auto';
+          var h1 = box.getBoundingClientRect().height;
+          if (Math.abs(h1 - h0) > 1) {
+            box.style.height = h0 + 'px'; box.offsetHeight;
+            box.style.transition = 'height .45s cubic-bezier(.2,.8,.2,1)'; box.style.height = h1 + 'px';
+            clearTimeout(box._ht); box._ht = setTimeout(function () { box.style.transition = ''; box.style.height = ''; }, 500);
+          } else box.style.height = '';
+        }
+        var st = box.querySelector('.quiz-stage');
+        if (!reduce && st.animate) st.animate([{ opacity: 0, transform: 'translateX(36px)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        if (after) after(st);
+        busy = false;
+      }
+      busy = true;
+      if (old && !reduce && old.animate) {
+        var an = old.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateX(-36px)' }], { duration: 220, easing: 'ease-in', fill: 'forwards' });
+        var done = false, fin = function () { if (!done) { done = true; put(); } };
+        an.onfinish = fin; setTimeout(fin, 320);
+      } else put();
+    }
+    function bar(n) { return '<div class="quiz-top"><span>Вопрос ' + n + ' / ' + Q.length + '</span><div class="quiz-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + Q.length + '" aria-valuenow="' + n + '"><i style="transform:scaleX(' + ((n - 1) / Q.length) + ')"></i></div></div>'; }
+    function ask() {
+      var q = Q[step], h = '<div class="quiz-stage">' + bar(step + 1) + '<h3 class="quiz-q">' + esc(q.q) + '</h3><div class="quiz-opts">';
+      q.a.forEach(function (a, i) { h += '<button type="button" class="quiz-opt" data-k="' + 'АБВГ'[i] + '" data-i="' + i + '">' + esc(a[0]) + '</button>'; });
+      swap(h + '</div></div>', function (st) {
+        var i = st.querySelector('.quiz-bar i');
+        requestAnimationFrame(function () { requestAnimationFrame(function () { i.style.transform = 'scaleX(' + ((step + 1) / Q.length) + ')'; }); });
+        var f = st.querySelector('.quiz-opt'); if (f && box.getAttribute('data-focus')) f.focus({ preventScroll: true });
+      });
+    }
+    function score() {
+      var c = {}, best = '', bv = -1;
+      picks.forEach(function (k) { c[k] = (c[k] || 0) + 1; });
+      /* при ничьей побеждает тот, кто выбран позже */
+      picks.forEach(function (k) { if (c[k] >= bv) { bv = c[k]; best = k; } });
+      return best;
+    }
+    function link(id) { return location.origin + location.pathname + '?alice=' + id + '#quiz'; }
+    function show(id, fresh) {
+      var r = R[id]; if (!r) return;
+      var h = '<div class="quiz-stage quiz-res"><div class="quiz-art"><img src="' + base + esc(r.img) + '" width="360" height="480" alt="' + esc(r.name + ' — ' + r.alias) + '"></div><div>' +
+        '<p style="margin:0 0 6px;color:#9A978F;font-size:14px">' + (fresh ? 'Ваш результат' : 'Результат теста «Какая ты Алиса?»') + '</p>' +
+        '<h3>' + esc(r.name) + '</h3><p class="alias">' + esc(r.alias) + '</p><p>' + esc(r.text) + '</p><p class="you">' + esc(r.you) + '</p>' +
+        '<div class="quiz-act"><button type="button" class="btn btn-primary" data-quiz-start>' + (fresh ? 'Пройти ещё раз' : 'Пройти тест') + '</button>' +
+        '<a class="btn btn-ghost" target="_blank" rel="noopener" href="https://t.me/share/url?url=' + encodeURIComponent(link(id)) + '&text=' + encodeURIComponent('Я — ' + r.name + ' из The False Alice! А ты какая Алиса?') + '">Telegram</a>' +
+        '<a class="btn btn-ghost" target="_blank" rel="noopener" href="https://vk.com/share.php?url=' + encodeURIComponent(link(id)) + '&title=' + encodeURIComponent('Я — ' + r.name + '! Какая ты Алиса?') + '">ВКонтакте</a>' +
+        '<button type="button" class="btn btn-ghost" data-quiz-copy="' + id + '">Копировать ссылку</button></div><p class="quiz-note" aria-live="polite"></p></div></div>';
+      swap(h);
+      if (fresh) {
+        try { history.replaceState(null, '', '?alice=' + id + '#quiz'); } catch (e) {}
+        if (typeof window.ym === 'function') { try { window.ym(114653532, 'reachGoal', 'quiz-finish', { alice: id }); } catch (e) {} }
+        if (window.goatcounter && window.goatcounter.count) { try { window.goatcounter.count({ path: 'quiz-finish-' + id, title: 'Тест: ' + r.name, event: true }); } catch (e) {} }
+      }
+    }
+    box.addEventListener('click', function (e) {
+      var t = e.target.closest('button'); if (!t || busy) return;
+      if (t.hasAttribute('data-quiz-start')) { step = 0; picks = []; box.setAttribute('data-focus', '1'); ask(); return; }
+      if (t.hasAttribute('data-quiz-copy')) {
+        var u = link(t.getAttribute('data-quiz-copy')), note = box.querySelector('.quiz-note');
+        var ok = function () { note.textContent = 'Ссылка скопирована'; }, no = function () { note.textContent = u; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(u).then(ok, no); else no();
+        return;
+      }
+      if (t.classList.contains('quiz-opt')) {
+        t.classList.add('picked'); busy = true;
+        picks.push(Q[step].a[+t.getAttribute('data-i')][1]);
+        setTimeout(function () { busy = false; step++; if (step < Q.length) ask(); else show(score(), true); }, reduce ? 0 : 260);
+      }
+    });
+    var m = /[?&]alice=(prima|secunda|tertia)\b/.exec(location.search);
+    if (m) {
+      show(m[1], false);
+      if (location.hash !== '#quiz') setTimeout(function () { box.scrollIntoView({ block: 'center' }); }, 50);
+    }
+  })();
 })();

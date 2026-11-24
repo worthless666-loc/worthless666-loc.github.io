@@ -23,9 +23,9 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="style.css?v=20261124i">
+<link rel="stylesheet" href="style.css?v=20261125a">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
-<script src="site.js?v=20261124i" defer></script>
+<script src="site.js?v=20261125a" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -137,6 +137,18 @@
 </div>
 <button type="button" class="gal-nav next" aria-label="Листать вперёд">›</button>
 </div>
+</section>
+
+<section id="quiz" style="max-width: 1200px; margin: 0 auto; padding: 32px 32px">
+<h2 style="margin: 0 0 20px; font-family: Unbounded, sans-serif; font-weight: 500; font-size: 28px">Какая ты Алиса?</h2>
+<div class="quiz" data-quiz>
+<div class="quiz-stage quiz-start">
+<p>Пять вопросов — и узнаете, кто вы из трёх Алис демо: Прима, Секунда или Терция. Без спойлеров дальше демо.</p>
+<button type="button" class="btn btn-primary" data-quiz-start style="background: #F2B84B; color: #14110A; border: 0; font: inherit; font-weight: 600; padding: 14px 24px; border-radius: 10px; cursor: pointer">Начать тест</button>
+<noscript><p style="margin-top: 14px">Для теста нужен включённый JavaScript.</p></noscript>
+</div>
+</div>
+<script type="application/json" id="quiz-data">{"questions": [{"q": "У реки лежит незнакомец без памяти. Ваш первый шаг?", "a": [["Сразу к нему — разберусь на месте!", "prima"], ["Держу дистанцию: сначала пойму, опасен ли он.", "secunda"], ["Тихонько спрошу, всё ли с ним в порядке.", "tertia"], ["Предложу остальным решить вместе.", "secunda"]]}, {"q": "Каким оружием вы сражаетесь в этом мире?", "a": [["Клинок: быстро и вблизи.", "prima"], ["Лук: точно и издалека.", "secunda"], ["Заклинания: медленно, зато красиво.", "tertia"], ["Словом — иногда оно острее стали.", "secunda"]]}, {"q": "Кролик спрашивает: сделали бы вы дорогого человека бессмертным?", "a": [["Да, не раздумывая!", "prima"], ["Сначала узнаю, какова цена.", "secunda"], ["Не знаю… а вдруг он сам этого не хочет?", "tertia"], ["Только если он сам попросит.", "tertia"]]}, {"q": "Какая вы в команде?", "a": [["Иду первой — остальные догонят.", "prima"], ["Держу план и слежу, чтобы никто не ударил в спину.", "secunda"], ["Поддерживаю всех и не даю поссориться.", "tertia"], ["Шумлю громче всех, но за своих стою горой.", "prima"]]}, {"q": "Учитель дарит вам новое имя. Ваша реакция?", "a": [["Отлично! Теперь его запомнят все!", "prima"], ["Хм. Пожалуй, подходит.", "secunda"], ["Чуть не плачу: теперь у меня есть своё место.", "tertia"], ["Повторю его про себя несколько раз — на всякий случай.", "tertia"]]}], "results": {"prima": {"name": "Прима", "alias": "Алая Алиса", "img": "alice-prima.webp", "text": "Миниатюрная блондинка в кроваво-красном платье — больше всех похожа на ту самую Алису. Сначала действует, потом говорит, но честна и прямодушна. Сражается одним клинком и в бой бросается первой.", "you": "Вы — Прима: смелая, горячая и прямая. Где все сомневаются, вы уже бежите вперёд."}, "secunda": {"name": "Секунда", "alias": "Алиса с луком", "img": "alice-secunda.webp", "text": "Голубоглазая охотница с луком за спиной. Спокойная, язвительная и рассудительная — но в глубине души романтик. Стреляет точно и издалека, а доверяет не сразу.", "you": "Вы — Секунда: холодная голова и острый язык. Держите дистанцию, пока не поймёте, кому можно верить."}, "tertia": {"name": "Терция", "alias": "Алиса в шляпе", "img": "alice-tertia.webp", "text": "Хрупкая волшебница в белой остроконечной шляпе. Робкая и вежливая, самая человечная из трёх: переживает за каждого и не стесняется слёз. Её заклинания читаются медленно — но не стоит её недооценивать.", "you": "Вы — Терция: мягкая, внимательная и добрая. И храбрее, чем кажется со стороны."}}}</script>
 </section>
 
 <section style="max-width: 1200px; margin: 0 auto; padding: 32px 32px">

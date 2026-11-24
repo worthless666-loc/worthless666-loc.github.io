@@ -1,0 +1,20 @@
+{
+ "name": "Переведено — фанатские русские переводы визуальных новелл",
+ "short_name": "Переведено",
+ "start_url": "/",
+ "display": "browser",
+ "background_color": "#0E1116",
+ "theme_color": "#0E1116",
+ "icons": [
+  {
+   "src": "/favicon-192x192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/favicon-512x512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}

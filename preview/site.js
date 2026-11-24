@@ -106,6 +106,47 @@
     io.observe(el);
   });
 
+  /* ---------- раскрывающиеся блоки: плавная высота, проявление, поворот стрелки ---------- */
+  document.querySelectorAll('details').forEach(function (d) {
+    var s = d.querySelector(':scope > summary'); if (!s) return;
+    var body = document.createElement('div'); body.className = 'dt-body';
+    while (s.nextSibling) body.appendChild(s.nextSibling);
+    d.appendChild(body);
+    d.classList.toggle('is-open', d.open);
+    d.addEventListener('toggle', function () { if (!d.classList.contains('closing')) d.classList.toggle('is-open', d.open); });
+    if (reduce || !d.animate) return;
+    var anim = null;
+    function closedH() {
+      var cs = getComputedStyle(d);
+      return s.getBoundingClientRect().height + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) +
+        parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+    }
+    function run(from, to, opening) {
+      if (anim) anim.cancel();
+      d.style.overflow = 'hidden'; d.style.boxSizing = 'border-box';
+      anim = d.animate({ height: [from + 'px', to + 'px'] }, { duration: opening ? 380 : 320, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      body.animate(opening ? { opacity: [0, 1], transform: ['translateY(-6px)', 'none'] } : { opacity: [1, 0] },
+        { duration: opening ? 420 : 200, easing: 'ease' });
+      var a = anim;
+      a.onfinish = function () {
+        if (a !== anim) return;
+        if (!opening) { d.open = false; d.classList.remove('closing'); }
+        d.style.overflow = ''; d.style.boxSizing = ''; anim = null;
+      };
+    }
+    s.addEventListener('click', function (e) {
+      e.preventDefault();
+      var from = d.getBoundingClientRect().height;
+      if (!d.open || d.classList.contains('closing')) {
+        d.classList.remove('closing'); d.open = true; d.classList.add('is-open');
+        run(from, d.getBoundingClientRect().height, true);
+      } else {
+        d.classList.add('closing'); d.classList.remove('is-open');
+        run(from, closedH(), false);
+      }
+    });
+  });
+
   /* ---------- стрелки → ---------- */
   document.querySelectorAll('a').forEach(function (a) {
     var n = a.lastChild;

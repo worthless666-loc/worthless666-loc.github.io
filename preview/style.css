@@ -40,6 +40,16 @@ main section[id]{scroll-margin-top:96px}
   .hb-shade{background:linear-gradient(180deg,rgba(14,17,22,.82) 0%,rgba(14,17,22,.74) 100%)}
 }
 
+/* ---------- раскрывающиеся блоки (details) ---------- */
+details>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::after{content:"";flex:none;width:8px;height:8px;margin-right:4px;border-right:2px solid var(--acc);border-bottom:2px solid var(--acc);
+  transform:translateY(-3px) rotate(45deg);transition:transform .38s var(--ease)}
+details.is-open>summary::after{transform:translateY(2px) rotate(225deg)}
+details>summary:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
+details[style*="border-radius: 12px"]{transition:border-color .3s}
+details[style*="border-radius: 12px"]:hover,details[style*="border-radius: 12px"].is-open{border-color:#3A404D!important}
+
 /* ---------- ссылки меню: выезжающее подчёркивание ---------- */
 .navl{position:relative}
 .navl::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:2px;border-radius:2px;
@@ -136,6 +146,7 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
   .gcard,.gcard.is-hot{transform:none}
   .gbanner>svg{transform:none!important}
   .glare{display:none}
+  details>summary::after{transition:none}
   .hb1{opacity:1}.hb2{opacity:0}.hb{transform:none}
   .split .w{opacity:1;transform:none}
   @view-transition{navigation:none}

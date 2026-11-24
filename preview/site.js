@@ -11,6 +11,28 @@
   window.addEventListener('scroll', function () { if (!hq) hq = requestAnimationFrame(hcheck); }, { passive: true });
   document.addEventListener('DOMContentLoaded', hcheck);
 
+  /* ---------- фон первого экрана: высота до конца hero ---------- */
+  var hbg = document.querySelector('.hero-bg');
+  if (hbg) {
+    var hero = document.querySelector('main > section');
+    var setH = function () { hbg.style.setProperty('--hero-h', (hero.getBoundingClientRect().bottom + window.scrollY) + 'px'); };
+    setH(); window.addEventListener('resize', setH);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setH);
+  }
+
+  /* ---------- заголовок появляется по словам ---------- */
+  document.querySelectorAll('h1.split').forEach(function (h) {
+    if (reduce) return;
+    var words = h.textContent.trim().split(/\s+/);
+    h.setAttribute('aria-label', h.textContent.trim());
+    h.textContent = '';
+    words.forEach(function (w, i) {
+      var s = document.createElement('span'); s.className = 'w'; s.setAttribute('aria-hidden', 'true');
+      s.style.setProperty('--i', i); s.textContent = w;
+      h.appendChild(s); if (i < words.length - 1) h.appendChild(document.createTextNode(' '));
+    });
+  });
+
   /* ---------- появление при прокрутке, ступеньками ---------- */
   var io = ('IntersectionObserver' in window) && !reduce ? new IntersectionObserver(function (es) {
     es.forEach(function (e) {
@@ -30,7 +52,7 @@
   }
   document.querySelectorAll('main > section').forEach(function (sec, si) {
     var direct = Array.prototype.filter.call(sec.children, function (c) {
-      return !c.querySelector('article') && !c.classList.contains('tiles') && !c.classList.contains('vt-fa');
+      return !c.querySelector('article') && !c.classList.contains('tiles') && !c.classList.contains('vt-fa') && !c.classList.contains('split');
     });
     reveal(direct, 0.07);
     reveal(sec.querySelectorAll('article'), 0.12);

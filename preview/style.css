@@ -19,6 +19,26 @@ body>div:first-child::before{content:"";position:absolute;z-index:-1;left:-15%;t
 main section[id]{scroll-margin-top:96px}
 @media (max-width:640px){.hdr{position:relative}.hdr::after{opacity:0!important}}
 
+/* ---------- фон первого экрана главной: арты игр ---------- */
+.hero-bg{position:absolute;z-index:-2;left:0;right:0;top:0;height:var(--hero-h,720px);overflow:hidden;pointer-events:none;background:#0E1116}
+.hb{position:absolute;inset:-4%;background-size:cover;background-position:60% 40%;opacity:0;will-change:transform,opacity}
+.hb1{opacity:1;animation:hbFade 16s linear infinite,kenA 16s ease-in-out infinite alternate}
+.hb2{animation:hbFade 16s linear -8s infinite,kenB 16s ease-in-out infinite alternate}
+@keyframes hbFade{0%{opacity:0}9%{opacity:1}50%{opacity:1}59%{opacity:0}100%{opacity:0}}
+@keyframes kenA{from{transform:scale(1.04) translate3d(-1%,0,0)}to{transform:scale(1.14) translate3d(1.5%,-1%,0)}}
+@keyframes kenB{from{transform:scale(1.12) translate3d(1.5%,1%,0)}to{transform:scale(1.04) translate3d(-1%,0,0)}}
+.hb-shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(14,17,22,.93) 0%,rgba(14,17,22,.86) 38%,rgba(14,17,22,.62) 68%,rgba(14,17,22,.5) 100%),
+  linear-gradient(180deg,rgba(14,17,22,.55) 0%,rgba(14,17,22,0) 22%,rgba(14,17,22,0) 62%,#0E1116 100%)}
+.split .w{display:inline-block;opacity:0;transform:translate3d(0,.45em,0);
+  animation:wIn .8s var(--ease) forwards;animation-delay:calc(.15s + var(--i) * .07s)}
+@keyframes wIn{to{opacity:1;transform:none}}
+@media (max-width:640px){
+  .hb1,.hb2{animation-name:hbFade}
+  .hb{inset:0;background-position:65% 50%}
+  .hb-shade{background:linear-gradient(180deg,rgba(14,17,22,.82) 0%,rgba(14,17,22,.78) 60%,#0E1116 100%)}
+}
+
 /* ---------- ссылки меню: выезжающее подчёркивание ---------- */
 .navl{position:relative}
 .navl::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:2px;border-radius:2px;
@@ -115,5 +135,7 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
   .gcard,.gcard.is-hot{transform:none}
   .gbanner>svg{transform:none!important}
   .glare{display:none}
+  .hb1{opacity:1}.hb2{opacity:0}.hb{transform:none}
+  .split .w{opacity:1;transform:none}
   @view-transition{navigation:none}
 }

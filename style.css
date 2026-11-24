@@ -245,3 +245,9 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
   .js .steps:not(.in) .step:not(:last-child)::after{transform:none}
   .js .steps:not(.in) .step-card{opacity:1;transform:none}
 }
+/* шаги: кружок по центру над карточкой, линия — от центра к центру; заголовки на одной высоте (ПК) */
+@media (min-width:901px){
+  .step-num{align-self:center}
+  .step:not(:last-child)::before,.step:not(:last-child)::after{left:calc(50% + 32px);width:calc(100% - 44px)}
+  .step-card strong{line-height:1.35;min-height:calc(2em * 1.35);display:flex;align-items:flex-start}
+}

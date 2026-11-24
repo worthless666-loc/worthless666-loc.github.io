@@ -23,19 +23,9 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap">
-<style>
-body{margin:0;background:#0E1116}
-a{color:#F2B84B}a:hover{color:#FFD27A}
-@media (max-width:480px){
-header>div,main>section,footer>div{padding-left:20px!important;padding-right:20px!important}
-h1{font-size:2rem!important;overflow-wrap:break-word}
-.hero-btns>a{flex:1 1 100%;text-align:center;box-sizing:border-box}
-.tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
-.tiles>div{padding:14px!important;min-height:112px!important}
-.tile-v{font-size:19px!important;line-height:1.25;overflow-wrap:break-word}
-#download>div{padding:24px!important}
-}
-</style>
+<link rel="stylesheet" href="style.css?v=20261124b">
+<script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
+<script src="site.js?v=20261124b" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -74,10 +64,10 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
 <body>
 <div style="min-height: 100vh; background: #0E1116; color: #E8E6E1; font-family: Inter, system-ui, sans-serif; font-size: 17px; line-height: 1.6">
 
-<header style="border-bottom: 1px solid #232833">
+<header class="hdr" style="border-bottom: 1px solid #232833">
 <div style="max-width: 1200px; margin: 0 auto; padding: 20px 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
 <a href="index.html" style="text-decoration: none; color: #E8E6E1; font-family: Unbounded, sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em">Переведено<span style="color: #F2B84B">.</span></a>
-<a href="index.html" style="color: #C9C6BF; text-decoration: none; padding: 10px 14px">← Все проекты</a>
+<a class="navl" href="index.html" style="color: #C9C6BF; text-decoration: none; padding: 10px 14px">← Все проекты</a>
 </div>
 </header>
 
@@ -91,12 +81,12 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
 <h1 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: clamp(2.2rem, 4.5vw, 3.6rem); line-height: 1.1"><span style="display: block; font-size: 0.42em; font-weight: 500; color: #F2B84B; margin-bottom: 6px">Русификатор демо</span> The False Alice <span style="white-space: nowrap">-Retold Tale-</span></h1>
 <p style="margin: 0; color: #B5B2AA; font-size: 19px; max-width: 620px">Мрачная сказочная визуальная новелла от VISUAL ARTS. Учитель, потерявший память, просыпается среди Неудачных творений и встречает трёх Ложных Алис: чтобы стать настоящей, каждой из них придётся убить остальных. Русский перевод демо-версии.</p>
 <div class="hero-btns" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
-<a href="#download" style="background: #F2B84B; color: #14110A; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px">Скачать патчер</a>
-<a href="https://store.steampowered.com/app/4013270/" style="color: #E8E6E1; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px; border: 1px solid #3A404D">Игра и демо в Steam</a>
+<a class="btn btn-primary" href="#download" style="background: #F2B84B; color: #14110A; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px">Скачать патчер</a>
+<a class="btn btn-ghost" href="https://store.steampowered.com/app/4013270/" style="color: #E8E6E1; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px; border: 1px solid #3A404D">Игра и демо в Steam</a>
 </div>
 <span style="color: #8E8B84; font-size: 14px; margin-top: -8px">демо, версия 1.0 · 24.11.2026 · ≈57 КБ</span>
 </div>
-<div style="flex: 1 1 420px; border-radius: 16px; overflow: hidden; border: 1px solid #262B36"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The False Alice -Retold Tale- — перевод демо на русском, 1285 строк" style="display: block; width: 100%; height: auto; background: #0B0E14"><defs><linearGradient id="lfG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="0.9"/><stop offset="0.38" stop-color="#0B0E14" stop-opacity="0.7"/><stop offset="0.62" stop-color="#0B0E14" stop-opacity="0"/></linearGradient><linearGradient id="lfGe" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="1"/><stop offset="1" stop-color="#0B0E14" stop-opacity="0"/></linearGradient></defs><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4013270/library_hero.jpg" x="330" y="0" width="1951" height="630" preserveAspectRatio="none"/><rect x="329" y="0" width="300" height="630" fill="url(#lfGe)"/><rect width="1200" height="630" fill="url(#lfG)"/><rect x="56" y="48" width="56" height="34" rx="8" fill="#F2B84B"/><text x="84" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#14110A" letter-spacing="1">RU</text><text x="128" y="72" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#E8E6E1" letter-spacing="2.4">ФАНАТСКИЙ ПЕРЕВОД</text><image href="false-alice-logo.png" x="58" y="185" width="520" height="147"/><text x="58" y="462" font-family="Unbounded, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">Перевод на русском</text><rect x="58" y="496" width="232" height="80" rx="16" fill="#F2B84B"/><text x="174" y="554" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="800" font-size="40" fill="#14110A">ДЕМО</text><text x="310" y="530" font-family="Inter, sans-serif" font-weight="600" font-size="19" fill="#E8E6E1">1285 строк</text><text x="310" y="556" font-family="Inter, sans-serif" font-weight="500" font-size="19" fill="#C9C6BF">+ меню</text><text x="1184" y="616" text-anchor="end" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" fill-opacity="0.6">Арт и логотип: © VISUAL ARTS</text></svg></div>
+<div class="vt-fa" style="flex: 1 1 420px; border-radius: 16px; overflow: hidden; border: 1px solid #262B36"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The False Alice -Retold Tale- — перевод демо на русском, 1285 строк" style="display: block; width: 100%; height: auto; background: #0B0E14"><defs><linearGradient id="lfG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="0.9"/><stop offset="0.38" stop-color="#0B0E14" stop-opacity="0.7"/><stop offset="0.62" stop-color="#0B0E14" stop-opacity="0"/></linearGradient><linearGradient id="lfGe" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="1"/><stop offset="1" stop-color="#0B0E14" stop-opacity="0"/></linearGradient></defs><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4013270/library_hero.jpg" x="330" y="0" width="1951" height="630" preserveAspectRatio="none"/><rect x="329" y="0" width="300" height="630" fill="url(#lfGe)"/><rect width="1200" height="630" fill="url(#lfG)"/><rect x="56" y="48" width="56" height="34" rx="8" fill="#F2B84B"/><text x="84" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#14110A" letter-spacing="1">RU</text><text x="128" y="72" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#E8E6E1" letter-spacing="2.4">ФАНАТСКИЙ ПЕРЕВОД</text><image href="false-alice-logo.png" x="58" y="185" width="520" height="147"/><text x="58" y="462" font-family="Unbounded, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">Перевод на русском</text><rect x="58" y="496" width="232" height="80" rx="16" fill="#F2B84B"/><text x="174" y="554" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="800" font-size="40" fill="#14110A">ДЕМО</text><text x="310" y="530" font-family="Inter, sans-serif" font-weight="600" font-size="19" fill="#E8E6E1">1285 строк</text><text x="310" y="556" font-family="Inter, sans-serif" font-weight="500" font-size="19" fill="#C9C6BF">+ меню</text><text x="1184" y="616" text-anchor="end" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" fill-opacity="0.6">Арт и логотип: © VISUAL ARTS</text></svg></div>
 </section>
 
 <section style="max-width: 1200px; margin: 0 auto; padding: 24px 32px 48px">
@@ -143,10 +133,10 @@ h1{font-size:2rem!important;overflow-wrap:break-word}
 <p style="margin: 0; color: #B5B2AA">Это перевод только демо. Для полной игры, которая выходит 26.11, патч не подойдёт: перевод полной версии сделаем позже и сообщим в Telegram.</p>
 </div>
 <div style="flex: 0 1 300px; display: flex; flex-direction: column; gap: 10px">
-<a href="https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/false-alice-demo-v1.0/False-Alice_RU_Patcher_demo.zip" data-goatcounter-click="download-false-alice-demo-1.0" data-goatcounter-title="Скачать русификатор False Alice (демо)" style="background: #F2B84B; color: #14110A; text-decoration: none; font-weight: 600; padding: 16px 24px; border-radius: 10px; text-align: center">Скачать патчер (.zip)</a>
+<a class="btn btn-primary" href="https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/false-alice-demo-v1.0/False-Alice_RU_Patcher_demo.zip" data-goatcounter-click="download-false-alice-demo-1.0" data-goatcounter-title="Скачать русификатор False Alice (демо)" style="background: #F2B84B; color: #14110A; text-decoration: none; font-weight: 600; padding: 16px 24px; border-radius: 10px; text-align: center">Скачать патчер (.zip)</a>
 <span style="color: #8E8B84; font-size: 14px; text-align: center">≈57 КБ · демо, версия 1.0 · Windows</span>
 <span style="color: #8E8B84; font-size: 14px; text-align: center">Последнее обновление: 24.11.2026</span>
-<a href="https://t.me/perevedeno_w" target="_blank" rel="noopener" data-goatcounter-click="tg-subscribe" data-goatcounter-title="Подписка на Telegram" style="margin-top: 8px; background: transparent; color: #F2B84B; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px; border: 1px solid #F2B84B; text-align: center">Подписаться на канал в Telegram</a>
+<a class="btn btn-ghost" href="https://t.me/perevedeno_w" target="_blank" rel="noopener" data-goatcounter-click="tg-subscribe" data-goatcounter-title="Подписка на Telegram" style="margin-top: 8px; background: transparent; color: #F2B84B; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px; border: 1px solid #F2B84B; text-align: center">Подписаться на канал в Telegram</a>
 <span style="color: #8E8B84; font-size: 14px; text-align: center">Новые версии и выбор следующей новеллы</span>
 </div>
 </div>

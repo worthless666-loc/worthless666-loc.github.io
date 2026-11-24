@@ -25,7 +25,7 @@
       news: ['Весь сюжет демо: 5 сцен, 1285 строк', 'Имена персонажей и текстовое меню', 'Родная кириллица в шрифте игры']
     }
   };
-  var S = { game: 'ps', screen: 'lib', st: { ps: 'installed', fa: 'none' }, prog: { ps: 0, fa: 0 } };
+  var S = { game: 'ps', screen: 'lib', st: { ps: 'installed', fa: 'none' }, prog: { ps: 0, fa: 0 }, ver: { ps: GAMES.ps.ver, fa: GAMES.fa.ver }, morph: false };
   var timers = { inst: null, tour: [] };
 
   var win = $('#win'), lib = $('#scrLib'), set = $('#scrSet'), gsel = $('#gsel'), toast = $('#toast');
@@ -36,7 +36,8 @@
   function sideStatus(id) {
     var g = GAMES[id], s = S.st[id];
     switch (s) {
-      case 'installed': return ['ok', 'Установлено · ' + g.ver];
+      case 'installed': return ['ok', 'Установлено · ' + S.ver[id]];
+      case 'updating': return ['run', 'Обновление… ' + Math.round(S.prog[id]) + '%'];
       case 'update': return ['upd', 'Доступно ' + g.next];
       case 'installing': return ['run', 'Установка… ' + Math.round(S.prog[id]) + '%'];
       case 'err-nf': return ['err', 'Игра не найдена'];
@@ -61,6 +62,7 @@
   }
 
   /* ---------- блок действия ---------- */
+  var PLAY = '<svg class="pl" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.6.6 0 0 0 .9.5l9-5.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>';
   function actHTML(id) {
     var g = GAMES[id], s = S.st[id], h = '';
     var sec = function (en) {
@@ -70,17 +72,20 @@
     if (s === 'none') {
       h = '<div class="act-row"><button type="button" class="btn btn-primary btn-big">Установить перевод</button></div>' +
         '<p class="act-hint">Найдём игру в Steam, сохраним копию оригинальных файлов и поставим перевод ' + g.ver + '.</p>' + sec(false);
-    } else if (s === 'installing') {
-      h = '<div class="prog-h"><strong>Ставим перевод ' + g.ver + '</strong><b data-pct>0%</b></div>' +
+    } else if (s === 'installing' || s === 'updating') {
+      h = '<div class="prog-h"><strong>' + (s === 'updating' ? 'Обновляем до ' + g.next : 'Ставим перевод ' + g.ver) + '</strong><b data-pct>0%</b></div>' +
         '<div class="bar"><i data-bar></i></div>' +
         '<ol class="steps"><li data-step="0"><span class="si"></span>Ищем игру…</li><li data-step="1"><span class="si"></span>Делаем копию…</li><li data-step="2"><span class="si"></span>Ставим перевод…</li></ol>' +
         '<p class="act-hint">Не закрывайте игру и лаунчер — это займёт пару секунд.</p>';
     } else if (s === 'installed') {
-      h = '<div class="act-row"><span class="btn btn-big btn-done pop" role="status">Установлено <span class="ck">✓</span></span></div>' +
-        '<p class="act-hint">Версия ' + g.ver + ' · запускайте игру как обычно, через Steam.</p>' + sec(true);
+      var mc = S.morph ? ' morph' : ''; S.morph = false;
+      h = '<div class="act-row"><button type="button" class="btn btn-primary btn-big btn-play' + mc + '">' + PLAY + 'Играть</button>' +
+        '<span class="st-tag' + mc + '" role="status">Установлено <span class="ck">✓</span></span></div>' +
+        '<p class="act-hint">Перевод ' + S.ver[id] + ' актуален · игра запустится через Steam.</p>' + sec(true);
     } else if (s === 'update') {
-      h = '<div class="act-row"><button type="button" class="btn btn-primary btn-big">Обновить до ' + g.next + '</button><span class="badge">Новая версия</span></div>' +
-        '<p class="act-hint">Сейчас стоит ' + g.ver + '. Сохранения и настройки игры не трогаем.</p>' + sec(true);
+      h = '<div class="act-row"><button type="button" class="btn btn-primary btn-big">Обновить до ' + g.next + '</button>' +
+        '<button type="button" class="btn btn-ghost btn-play2">' + PLAY + 'Играть</button></div>' +
+        '<p class="act-hint"><span class="badge">Новая версия</span> Сейчас стоит ' + g.ver + ' — играть можно и на ней. Сохранения и настройки игры не трогаем.</p>' + sec(true);
     } else if (s === 'err-nf') {
       h = '<div class="err"><span class="err-ic">!</span><div><h3>Игра не найдена</h3><p>Не нашли ' + esc(g.name) + ' в библиотеках Steam. Если игра стоит в другом месте — укажите её папку вручную.</p>' +
         '<div class="act-row"><button type="button" class="btn btn-primary btn-m">Указать папку</button><button type="button" class="btn btn-ghost btn-m">Проверить снова</button></div></div></div>';
@@ -98,7 +103,7 @@
   }
   function libHTML(id) {
     var g = GAMES[id], s = S.st[id];
-    var verTile = s === 'update' ? g.ver + '<span class="nv">→ ' + g.next + '</span>' : g.ver;
+    var verTile = s === 'update' || s === 'updating' ? g.ver + '<span class="nv">→ ' + g.next + '</span>' : S.ver[id];
     return '<div class="hero"><div class="hero-art" style="background-image:url(' + g.art + ');--ap:' + g.ap + (g.as ? ';--as:' + g.as : '') + '"></div>' +
       '<div class="hero-t"><span class="hero-k ap" style="--i:0">' + esc(g.kind) + '</span>' +
       '<h1 class="ap" style="--i:1">' + esc(g.name) + (g.tag ? '<small>' + g.tag + '</small>' : '') + '</h1>' +
@@ -131,7 +136,7 @@
       hideScreen(set);
       if (anim === false) { lib.innerHTML = libHTML(S.game); lib.hidden = false; }
       else swapScreen(lib, libHTML(S.game));
-      if (S.st[S.game] === 'installing') runInstall(S.game);
+      if (/ing$/.test(S.st[S.game])) runInstall(S.game);
     } else {
       hideScreen(lib);
       swapScreen(set, null);
@@ -144,9 +149,9 @@
     a.setAttribute('data-s', S.st[S.game]);
     a.innerHTML = actHTML(S.game);
     var t = $$('.tile b', lib)[1], g = GAMES[S.game];
-    if (t) t.innerHTML = S.st[S.game] === 'update' ? g.ver + '<span class="nv">→ ' + g.next + '</span>' : g.ver;
+    if (t) t.innerHTML = /^updat/.test(S.st[S.game]) ? g.ver + '<span class="nv">→ ' + g.next + '</span>' : S.ver[S.game];
     var gp = $('.gpath', lib); if (gp) { var d = document.createElement('div'); d.innerHTML = pathHTML(S.game); gp.replaceWith(d.firstChild); }
-    if (S.st[S.game] === 'installing') runInstall(S.game);
+    if (/ing$/.test(S.st[S.game])) runInstall(S.game);
     paintSide(); paintDemo();
   }
 
@@ -172,7 +177,7 @@
       if (p >= 1) {
         clearInterval(timers.inst);
         if (S.game === id && S.screen === 'lib') $$('.steps li', lib).forEach(function (li) { li.className = 'ok'; });
-        setTimeout(function () { if (S.st[id] === 'installing') { S.st[id] = 'installed'; renderAct(); } }, 450);
+        setTimeout(function () { if (/ing$/.test(S.st[id])) { if (S.st[id] === 'updating') S.ver[id] = GAMES[id].next; S.st[id] = 'installed'; S.morph = true; renderAct(); S.morph = false; } }, 450);
       }
     };
     timers.inst = setInterval(tick, 50); tick();
@@ -241,6 +246,7 @@
   function stopTour() { timers.tour.forEach(clearTimeout); timers.tour = []; $('[data-act=tour]').setAttribute('aria-pressed', 'false'); }
   function setState(v) {
     clearInterval(timers.inst);
+    if (v !== 'installed' && v !== 'updating') S.ver[S.game] = GAMES[S.game].ver;
     S.st[S.game] = v;
     if (S.screen !== 'lib') { S.screen = 'lib'; render(); } else renderAct();
   }
@@ -259,11 +265,12 @@
         [2200, function () { setState('installing'); }],
         [9000, showToast],
         [11500, function () { hideToast(); setState('update'); }],
-        [15000, function () { setState('err-nf'); }],
-        [18500, function () { setState('err-ver'); }],
-        [22000, function () { S.game = 'fa'; S.st.fa = 'none'; render(); }],
-        [25000, function () { S.screen = 'set'; render(); }],
-        [28500, function () { S.screen = 'lib'; S.game = 'ps'; S.st.ps = 'installed'; render(); stopTour(); }]];
+        [14500, function () { setState('updating'); }],
+        [22500, function () { setState('err-nf'); }],
+        [26000, function () { setState('err-ver'); }],
+        [29500, function () { S.game = 'fa'; S.st.fa = 'none'; render(); }],
+        [32500, function () { S.screen = 'set'; render(); }],
+        [36000, function () { S.screen = 'lib'; S.game = 'ps'; S.st.ps = 'installed'; render(); stopTour(); }]];
       seq.forEach(function (s) { timers.tour.push(setTimeout(s[1], s[0])); });
     }
   });
@@ -272,7 +279,7 @@
   (function () {
     var q = new URLSearchParams(location.search);
     if (GAMES[q.get('game')]) S.game = q.get('game');
-    if (/^(none|installing|installed|update|err-nf|err-ver)$/.test(q.get('state') || '')) S.st[S.game] = q.get('state');
+    if (/^(none|installing|installed|update|updating|err-nf|err-ver)$/.test(q.get('state') || '')) S.st[S.game] = q.get('state');
     if (q.get('screen') === 'set') S.screen = 'set';
     fit(); render(false);
     if (S.screen === 'set') { lib.hidden = true; set.hidden = false; }

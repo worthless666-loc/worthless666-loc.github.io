@@ -248,6 +248,18 @@ a:hover .arr,.btn:hover .arr{transform:translateX(4px)}
 .dc[aria-pressed=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:600}
 .dc.play{border-style:dashed}
 
+/* «Играть» и метка статуса */
+.btn .pl{flex:none}
+.btn-play2{font-size:15px;padding:16px 20px;border-radius:12px}
+.btn-play2 .pl{color:var(--acc)}
+.st-tag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ok);background:var(--ok-bg);padding:7px 12px;border-radius:999px;box-shadow:0 0 0 1px rgba(143,227,168,.25)}
+.st-tag .ck{display:inline-block;animation:ckPop .6s var(--spring) .15s both}
+/* полоса установки «схлопывается» в кнопку */
+.btn-play.morph{transform-origin:0 50%;animation:toPlay .7s var(--spring) both}
+@keyframes toPlay{0%{transform:scale(1.9,.16);opacity:.5}55%{transform:scale(.97,1.06);opacity:1}100%{transform:none}}
+.btn-play.morph>*{animation:apIn .4s var(--ease) .3s both}
+.st-tag.morph{animation:apIn .5s var(--ease) .45s both}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important}
   .bar::after,.btn-big.btn-primary::after{display:none}
@@ -259,3 +271,4 @@ a:hover .arr,.btn:hover .arr{transform:translateX(4px)}
 .gpath code{font:500 12px/1.4 ui-monospace,"Cascadia Mono",Consolas,monospace;color:#C9C6BF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
 .gpath b{font-weight:600;color:var(--ok);white-space:nowrap}
 .gpath b.no{color:var(--err)}
+.act-hint .badge{margin-right:6px;vertical-align:1px}

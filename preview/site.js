@@ -268,7 +268,16 @@
     function close() {
       if (!lb || lb.hidden || busy) return;
       busy = true;
-      var link = items[cur].link, r = link.getBoundingClientRect();
+      var link = items[cur].link, item = link.closest('.gal-item');
+      if (item) {                                /* лента доезжает до текущего кадра, чтобы он «влетел» в свою миниатюру */
+        var gr = gal.getBoundingClientRect(), ir = item.getBoundingClientRect();
+        if (ir.left < gr.left || ir.right > gr.right) {
+          var sb = gal.style.scrollBehavior; gal.style.scrollBehavior = 'auto';
+          gal.scrollLeft += ir.left - gr.left; gal.style.scrollBehavior = sb;
+        }
+      }
+      lastFocus = link;
+      var r = link.getBoundingClientRect();
       var visible = r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth;
       img.style.transformOrigin = '0 0';
       var from = visible ? rectFrom(link) : null;

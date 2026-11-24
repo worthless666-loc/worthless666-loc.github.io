@@ -28,6 +28,23 @@
 <style>
 body{margin:0;background:#0E1116}
 a{color:#F2B84B}a:hover{color:#FFD27A}
+.gcard{position:relative;transition:transform .15s ease,border-color .15s ease}
+.gcard:hover{transform:translateY(-2px);border-color:#F2B84B!important}
+.gcard-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:16px}
+.gcard-link:focus{outline:none}
+.gcard-link:focus-visible::after{outline:2px solid #F2B84B;outline-offset:2px}
+.gcard-tg{position:relative;z-index:2}
+.gcard-tg:focus-visible{outline:2px solid #F2B84B;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.gcard{transition:none}.gcard:hover{transform:none}}
+@media (max-width:480px){
+header>div,main>section,footer>div{padding-left:20px!important;padding-right:20px!important}
+h1{font-size:2rem!important;overflow-wrap:break-word}
+.hero-btns>a{flex:1 1 100%;text-align:center;box-sizing:border-box}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+.tiles>div{padding:14px!important;min-height:112px!important}
+.tile-v{font-size:19px!important;line-height:1.25;overflow-wrap:break-word}
+#download>div{padding:24px!important}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -68,7 +85,7 @@ a{color:#F2B84B}a:hover{color:#FFD27A}
 <p style="margin: 0; color: #F2B84B; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; font-size: 14px">Фанатские переводы визуальных новелл</p>
 <h1 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 700; font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.1; max-width: 900px">Новеллы, которые не дождались русского — переводим сами</h1>
 <p style="margin: 0; max-width: 680px; color: #B5B2AA; font-size: 19px">Переводим весь доступный текст: сюжет, интерфейс, имена. Ставятся патчем поверх вашей лицензионной копии игры — за пару минут.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
+<div class="hero-btns" style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px">
 <a href="false-alice.html" style="background: #F2B84B; color: #14110A; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px">Последний релиз →</a>
 <a href="#projects" style="color: #E8E6E1; text-decoration: none; font-weight: 600; padding: 14px 24px; border-radius: 10px; border: 1px solid #3A404D">Все проекты</a>
 </div>
@@ -76,10 +93,10 @@ a{color:#F2B84B}a:hover{color:#FFD27A}
 
 <section id="projects" style="max-width: 1200px; margin: 0 auto; padding: 48px 32px">
 <h2 style="margin: 0 0 28px; font-family: Unbounded, sans-serif; font-weight: 500; font-size: 30px">Проекты</h2>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px">
 
-<article style="background: #161A22; border: 1px solid #262B36; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
-<a href="psycho-sleuth.html" style="display: block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Psycho-Sleuth — перевод на русском, 5 из 5 глав" style="display: block; width: 100%; height: auto; background: #0B0E14"><defs><linearGradient id="lfG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="0.9"/><stop offset="0.38" stop-color="#0B0E14" stop-opacity="0.7"/><stop offset="0.62" stop-color="#0B0E14" stop-opacity="0"/></linearGradient></defs><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3432860/library_hero.jpg" x="-170" y="0" width="1951" height="630" preserveAspectRatio="none"/><rect width="1200" height="630" fill="url(#lfG)"/><rect x="56" y="48" width="56" height="34" rx="8" fill="#F2B84B"/><text x="84" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#14110A" letter-spacing="1">RU</text><text x="128" y="72" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#E8E6E1" letter-spacing="2.4">ФАНАТСКИЙ ПЕРЕВОД</text><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3432860/logo.png" x="24" y="96" width="576" height="324"/><text x="58" y="462" font-family="Unbounded, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">Перевод на русском</text><rect x="58" y="496" width="232" height="80" rx="16" fill="#F2B84B"/><text x="80" y="556" font-family="Unbounded, sans-serif" font-weight="800" font-size="56" fill="#14110A">5/5</text><text x="208" y="556" font-family="Unbounded, sans-serif" font-weight="700" font-size="24" fill="#14110A">глав</text><text x="310" y="530" font-family="Inter, sans-serif" font-weight="600" font-size="19" fill="#E8E6E1">≈24 700 строк</text><text x="310" y="556" font-family="Inter, sans-serif" font-weight="500" font-size="19" fill="#C9C6BF">+ интерфейс</text><text x="1184" y="616" text-anchor="end" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" fill-opacity="0.6">Арт и логотип: © PHOSEPO</text></svg></a>
+<article class="gcard" style="background: #161A22; border: 1px solid #262B36; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+<a href="psycho-sleuth.html" tabindex="-1" aria-hidden="true" style="display: block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Psycho-Sleuth — перевод на русском, 5 из 5 глав" style="display: block; width: 100%; height: auto; background: #0B0E14"><defs><linearGradient id="lfG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="0.9"/><stop offset="0.38" stop-color="#0B0E14" stop-opacity="0.7"/><stop offset="0.62" stop-color="#0B0E14" stop-opacity="0"/></linearGradient></defs><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3432860/library_hero.jpg" x="-170" y="0" width="1951" height="630" preserveAspectRatio="none"/><rect width="1200" height="630" fill="url(#lfG)"/><rect x="56" y="48" width="56" height="34" rx="8" fill="#F2B84B"/><text x="84" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#14110A" letter-spacing="1">RU</text><text x="128" y="72" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#E8E6E1" letter-spacing="2.4">ФАНАТСКИЙ ПЕРЕВОД</text><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3432860/logo.png" x="24" y="96" width="576" height="324"/><text x="58" y="462" font-family="Unbounded, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">Перевод на русском</text><rect x="58" y="496" width="232" height="80" rx="16" fill="#F2B84B"/><text x="80" y="556" font-family="Unbounded, sans-serif" font-weight="800" font-size="56" fill="#14110A">5/5</text><text x="208" y="556" font-family="Unbounded, sans-serif" font-weight="700" font-size="24" fill="#14110A">глав</text><text x="310" y="530" font-family="Inter, sans-serif" font-weight="600" font-size="19" fill="#E8E6E1">≈24 700 строк</text><text x="310" y="556" font-family="Inter, sans-serif" font-weight="500" font-size="19" fill="#C9C6BF">+ интерфейс</text><text x="1184" y="616" text-anchor="end" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" fill-opacity="0.6">Арт и логотип: © PHOSEPO</text></svg></a>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
 <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
 <span style="background: #1F3A2A; color: #8FE3A8; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px">Готово</span>
@@ -92,18 +109,18 @@ a{color:#F2B84B}a:hover{color:#FFD27A}
 <div style="height: 8px; background: #262B36; border-radius: 999px"><div style="width: 90%; height: 8px; background: #F2B84B; border-radius: 999px"></div></div>
 </div>
 <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
-<a href="psycho-sleuth.html" style="text-decoration: none; font-weight: 600; padding: 12px 0">Открыть страницу проекта →</a>
+<a href="psycho-sleuth.html" class="gcard-link" style="text-decoration: none; font-weight: 600; padding: 12px 0">Открыть страницу проекта →</a>
 <span style="font-size: 13px; color: #9A978F">Последнее обновление: 23.11.2026</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px">
-<a href="https://t.me/perevedeno_w" target="_blank" rel="noopener" data-goatcounter-click="tg-subscribe" data-goatcounter-title="Подписка на Telegram" style="background: transparent; color: #F2B84B; text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 16px; border-radius: 10px; border: 1px solid #F2B84B; text-align: center">Подписаться на канал в Telegram</a>
+<a href="https://t.me/perevedeno_w" class="gcard-tg" target="_blank" rel="noopener" data-goatcounter-click="tg-subscribe" data-goatcounter-title="Подписка на Telegram" style="background: transparent; color: #F2B84B; text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 16px; border-radius: 10px; border: 1px solid #F2B84B; text-align: center">Подписаться на канал в Telegram</a>
 <span style="font-size: 13px; color: #9A978F">Новые версии и выбор следующей новеллы</span>
 </div>
 </div>
 </article>
 
-<article style="background: #161A22; border: 1px solid #262B36; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
-<a href="false-alice.html" style="display: block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The False Alice -Retold Tale- — перевод демо на русском, 1285 строк" style="display: block; width: 100%; height: auto; background: #0B0E14"><defs><linearGradient id="lfGfa" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="0.9"/><stop offset="0.38" stop-color="#0B0E14" stop-opacity="0.7"/><stop offset="0.62" stop-color="#0B0E14" stop-opacity="0"/></linearGradient><linearGradient id="lfGfae" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="1"/><stop offset="1" stop-color="#0B0E14" stop-opacity="0"/></linearGradient></defs><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4013270/library_hero.jpg" x="330" y="0" width="1951" height="630" preserveAspectRatio="none"/><rect x="329" y="0" width="300" height="630" fill="url(#lfGfae)"/><rect width="1200" height="630" fill="url(#lfGfa)"/><rect x="56" y="48" width="56" height="34" rx="8" fill="#F2B84B"/><text x="84" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#14110A" letter-spacing="1">RU</text><text x="128" y="72" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#E8E6E1" letter-spacing="2.4">ФАНАТСКИЙ ПЕРЕВОД</text><image href="false-alice-logo.png" x="58" y="185" width="520" height="147"/><text x="58" y="462" font-family="Unbounded, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">Перевод на русском</text><rect x="58" y="496" width="232" height="80" rx="16" fill="#F2B84B"/><text x="174" y="554" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="800" font-size="40" fill="#14110A">ДЕМО</text><text x="310" y="530" font-family="Inter, sans-serif" font-weight="600" font-size="19" fill="#E8E6E1">1285 строк</text><text x="310" y="556" font-family="Inter, sans-serif" font-weight="500" font-size="19" fill="#C9C6BF">+ меню</text><text x="1184" y="616" text-anchor="end" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" fill-opacity="0.6">Арт и логотип: © VISUAL ARTS</text></svg></a>
+<article class="gcard" style="background: #161A22; border: 1px solid #262B36; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column">
+<a href="false-alice.html" tabindex="-1" aria-hidden="true" style="display: block"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The False Alice -Retold Tale- — перевод демо на русском, 1285 строк" style="display: block; width: 100%; height: auto; background: #0B0E14"><defs><linearGradient id="lfGfa" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="0.9"/><stop offset="0.38" stop-color="#0B0E14" stop-opacity="0.7"/><stop offset="0.62" stop-color="#0B0E14" stop-opacity="0"/></linearGradient><linearGradient id="lfGfae" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0B0E14" stop-opacity="1"/><stop offset="1" stop-color="#0B0E14" stop-opacity="0"/></linearGradient></defs><image href="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/4013270/library_hero.jpg" x="330" y="0" width="1951" height="630" preserveAspectRatio="none"/><rect x="329" y="0" width="300" height="630" fill="url(#lfGfae)"/><rect width="1200" height="630" fill="url(#lfGfa)"/><rect x="56" y="48" width="56" height="34" rx="8" fill="#F2B84B"/><text x="84" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#14110A" letter-spacing="1">RU</text><text x="128" y="72" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#E8E6E1" letter-spacing="2.4">ФАНАТСКИЙ ПЕРЕВОД</text><image href="false-alice-logo.png" x="58" y="185" width="520" height="147"/><text x="58" y="462" font-family="Unbounded, sans-serif" font-weight="800" font-size="44" fill="#FFFFFF">Перевод на русском</text><rect x="58" y="496" width="232" height="80" rx="16" fill="#F2B84B"/><text x="174" y="554" text-anchor="middle" font-family="Unbounded, sans-serif" font-weight="800" font-size="40" fill="#14110A">ДЕМО</text><text x="310" y="530" font-family="Inter, sans-serif" font-weight="600" font-size="19" fill="#E8E6E1">1285 строк</text><text x="310" y="556" font-family="Inter, sans-serif" font-weight="500" font-size="19" fill="#C9C6BF">+ меню</text><text x="1184" y="616" text-anchor="end" font-family="Inter, sans-serif" font-size="13" fill="#FFFFFF" fill-opacity="0.6">Арт и логотип: © VISUAL ARTS</text></svg></a>
 <div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1">
 <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
 <span style="background: #1F3A2A; color: #8FE3A8; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px">Демо готово</span>
@@ -116,11 +133,11 @@ a{color:#F2B84B}a:hover{color:#FFD27A}
 <div style="height: 8px; background: #262B36; border-radius: 999px"><div style="width: 87%; height: 8px; background: #F2B84B; border-radius: 999px"></div></div>
 </div>
 <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
-<a href="false-alice.html" style="text-decoration: none; font-weight: 600; padding: 12px 0">Открыть страницу проекта →</a>
+<a href="false-alice.html" class="gcard-link" style="text-decoration: none; font-weight: 600; padding: 12px 0">Открыть страницу проекта →</a>
 <span style="font-size: 13px; color: #9A978F">Последнее обновление: 24.11.2026</span>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px">
-<a href="https://t.me/perevedeno_w" target="_blank" rel="noopener" data-goatcounter-click="tg-subscribe" data-goatcounter-title="Подписка на Telegram" style="background: transparent; color: #F2B84B; text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 16px; border-radius: 10px; border: 1px solid #F2B84B; text-align: center">Подписаться на канал в Telegram</a>
+<a href="https://t.me/perevedeno_w" class="gcard-tg" target="_blank" rel="noopener" data-goatcounter-click="tg-subscribe" data-goatcounter-title="Подписка на Telegram" style="background: transparent; color: #F2B84B; text-decoration: none; font-weight: 600; font-size: 15px; padding: 10px 16px; border-radius: 10px; border: 1px solid #F2B84B; text-align: center">Подписаться на канал в Telegram</a>
 <span style="font-size: 13px; color: #9A978F">Новые версии и выбор следующей новеллы</span>
 </div>
 </div>

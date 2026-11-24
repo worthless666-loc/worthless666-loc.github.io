@@ -75,21 +75,42 @@
   var EASE = 'cubic-bezier(.33,1,.68,1)';            /* = easeOutCubic */
   function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
   function randDur() { return 5000 + Math.random() * 3000; }  /* 5–8 с, своя для каждой */
+  var NUM = /^(\d[\d\s ]*)(%|\+)?$/;
+  function fmt(n, big) { return big ? n.toLocaleString('ru-RU') : String(n); }
   function counter(el) {
-    var txt = el.textContent.trim(), m = /^(\d[\d\s]*)(%?)$/.exec(txt);
+    var txt = el.textContent.trim(), m = NUM.exec(txt);
     if (!m) return null;
-    var target = parseInt(m[1].replace(/\s/g, ''), 10);
+    var suf = m[2] || '', big = /[\s ]/.test(m[1]);
+    var target = parseInt(m[1].replace(/[\s ]/g, ''), 10), cur = 0, done = false, running = false;
     el.setAttribute('aria-label', txt); el.style.fontVariantNumeric = 'tabular-nums';
-    el.textContent = '0' + m[2];
-    return function (dur) {
-      var t0 = performance.now();
+    el.textContent = '0' + suf;
+    function anim(from, dur) {
+      running = true; var t0 = performance.now();
       (function tick(t) {
         var p = Math.min(1, (t - t0) / dur);
-        el.textContent = p < 1 ? Math.round(target * easeOut(p)) + m[2] : txt;
-        if (p < 1) requestAnimationFrame(tick);
+        cur = Math.round(from + (target - from) * easeOut(p));
+        el.textContent = p < 1 ? fmt(cur, big) + suf : txt;
+        if (p < 1) requestAnimationFrame(tick); else { running = false; done = true; }
       })(t0);
-      setTimeout(function () { el.textContent = txt; }, dur + 500);
+      setTimeout(function () { if (running || !done) { el.textContent = txt; running = false; done = true; cur = target; } }, dur + 500);
+    }
+    var run = function (dur) { anim(0, dur); };
+    run.set = function (newTxt) {           /* живое число пришло позже: плавно доводим до него */
+      var mm = NUM.exec(newTxt); if (!mm) return;
+      txt = newTxt; el.setAttribute('aria-label', txt);
+      target = parseInt(mm[1].replace(/[\s ]/g, ''), 10);
+      if (done) anim(cur, 700);
     };
+    return run;
+  }
+
+  /* ---------- «О нас»: число скачиваний патчей из GitHub (кэш в sessionStorage, при ошибке — число из HTML) ---------- */
+  var ghEl = document.querySelector('[data-live="gh-downloads"]'), GH_KEY = 'perevedeno:gh-downloads';
+  if (ghEl) {
+    try {
+      var c0 = JSON.parse(sessionStorage.getItem(GH_KEY) || 'null');
+      if (c0 && Date.now() - c0.t < 30 * 60 * 1000 && c0.v > 0) { ghEl.textContent = String(c0.v); ghEl.__fresh = true; }
+    } catch (e) {}
   }
 
   /* страховка: если наблюдатель не сработал, показать то, что уже на экране */
@@ -129,9 +150,22 @@
     if (reduce || !io) return;
     var run = counter(el);
     if (!run) return;
+    el.__counter = run;
     el.__onIn = function () { run(randDur()); };
     io.observe(el);
   });
+  if (ghEl && !ghEl.__fresh && window.fetch) {
+    fetch('https://api.github.com/repos/worthless666-loc/worthless666-loc.github.io/releases?per_page=100')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (list) {
+        var sum = 0;
+        list.forEach(function (rel) { (rel.assets || []).forEach(function (a) { sum += a.download_count || 0; }); });
+        if (!(sum > 0)) return;
+        try { sessionStorage.setItem(GH_KEY, JSON.stringify({ v: sum, t: Date.now() })); } catch (e) {}
+        if (ghEl.__counter) ghEl.__counter.set(String(sum)); else ghEl.textContent = String(sum);
+      })
+      .catch(function () { /* остаётся запасное число из HTML */ });
+  }
 
   /* ---------- раскрывающиеся блоки: плавная высота, проявление, поворот стрелки ---------- */
   document.querySelectorAll('details').forEach(function (d) {
@@ -321,6 +355,11 @@
   });
 
   /* ---------- стрелки → ---------- */
+  /* «Наверх ↑» — плавно */
+  document.querySelectorAll('.ft-top').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+  });
+
   document.querySelectorAll('a').forEach(function (a) {
     var n = a.lastChild;
     if (n && n.nodeType === 3 && /→\s*$/.test(n.nodeValue)) {

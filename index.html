@@ -25,9 +25,9 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap">
-<link rel="stylesheet" href="style.css?v=20261124g">
+<link rel="stylesheet" href="style.css?v=20261124h">
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
-<script src="site.js?v=20261124g" defer></script>
+<script src="site.js?v=20261124h" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -169,7 +169,7 @@
 <div class="step-card"><svg class="step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg><strong style="font-size: 18px">Распакуйте и запустите</strong>
 <span style="color: #B5B2AA">Распакуйте архив в любую папку (не запускайте патчер прямо из архива), закройте игру, запустите патчер и нажмите «Установить перевод». Он сам найдёт игру и сделает резервную копию — установка занимает до минуты.</span></div>
 </li>
-<li class="step" style="--i: 3">
+<li class="step" id="install-restore" style="--i: 3">
 <span class="step-num" aria-hidden="true"><span class="n1">04</span><span class="n2">04</span></span>
 <div class="step-card"><svg class="step-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 4v4h4"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 20v-4h-4"/></svg><strong style="font-size: 18px">Обновляете перевод?</strong>
 <span style="color: #B5B2AA">Сначала нажмите «Вернуть английский» в старой версии патчера, затем установите новую. Вернуть английский можно и в Steam: «Проверить целостность файлов».</span></div>
@@ -224,21 +224,54 @@
 </section>
 
 <section id="about" style="max-width: 1200px; margin: 0 auto; padding: 64px 32px 96px">
-<div style="background: #161A22; border: 1px solid #262B36; border-radius: 20px; padding: 40px; display: flex; flex-wrap: wrap; gap: 32px">
+<div style="background: #161A22; border: 1px solid #262B36; border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; gap: 32px">
 <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 12px">
-<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 500; font-size: 30px">О проекте</h2>
-<p style="margin: 0; color: #B5B2AA">Мы — небольшая команда фанатов. Переводим бесплатно и некоммерчески. Все права на игры принадлежат их разработчикам и издателям; если вы правообладатель и против перевода — напишите, мы уберём материалы.</p>
+<h2 style="margin: 0; font-family: Unbounded, sans-serif; font-weight: 500; font-size: 30px">О нас</h2>
+<p style="margin: 0; color: #C9C6BF; font-size: 18px">«Переведено.» — небольшая фанатская команда. Переводим визуальные новеллы, которые не дождались русского, — бесплатно и некоммерчески; перевод ставится патчем поверх вашей лицензионной копии игры.</p>
+<p style="margin: 0; color: #9A978F; font-size: 15px">Все права на игры принадлежат их разработчикам и издателям; если вы правообладатель и против перевода — напишите, мы уберём материалы.</p>
 </div>
-<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 12px">
+<div style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 12px">
 <h3 style="margin: 0; font-size: 18px; font-weight: 600">Связаться</h3>
 <a href="https://t.me/perevedeno_w" style="text-decoration: none; padding: 10px 0">Telegram-канал: @perevedeno_w</a>
+</div>
+</div>
+<div class="tiles about-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<div style="background: #0E1116; border: 1px solid #262B36; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; min-height: 130px">
+<div style="color: #9A978F; font-size: 14px">Игр переведено</div>
+<div class="tile-v" style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-family: Unbounded, sans-serif; font-size: 30px">2</div>
+<div class="tile-note">Psycho-Sleuth и демо False Alice</div>
+</div>
+<div style="background: #0E1116; border: 1px solid #262B36; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; min-height: 130px">
+<div style="color: #9A978F; font-size: 14px">Строк переведено</div>
+<div class="tile-v" style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-family: Unbounded, sans-serif; font-size: 30px">27 000+</div>
+<div class="tile-note">сюжет, интерфейс, субтитры</div>
+</div>
+<div style="background: #0E1116; border: 1px solid #262B36; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; min-height: 130px">
+<div style="color: #9A978F; font-size: 14px">Скачиваний патчей</div>
+<div class="tile-v" data-live="gh-downloads" style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-family: Unbounded, sans-serif; font-size: 30px">67</div>
+<div class="tile-note">по данным GitHub</div>
+</div>
+<div style="background: #0E1116; border: 1px solid #262B36; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; min-height: 130px">
+<div style="color: #9A978F; font-size: 14px">Глав и сцен</div>
+<div class="tile-v" style="flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; font-family: Unbounded, sans-serif; font-size: 30px">10</div>
+<div class="tile-note">5 глав + 5 сцен демо</div>
+</div>
 </div>
 </div>
 </section>
 </main>
 
-<footer style="border-top: 1px solid #232833">
-<div style="max-width: 1200px; margin: 0 auto; padding: 28px 32px; color: #8E8B84; font-size: 14px">Переведено · фанатские переводы, 2026</div>
+<footer class="site-footer">
+<div class="ft-in">
+<div class="ft-brand"><a class="ft-logo" href="index.html">Переведено<span>.</span></a><p>Фанатские русские переводы визуальных новелл, которые не дождались русского.</p></div>
+<nav class="ft-cols" aria-label="Ссылки в подвале">
+<div><h3>Проекты</h3><a href="psycho-sleuth.html">Psycho-Sleuth</a><a href="false-alice.html">False Alice</a></div>
+<div><h3>Помощь</h3><a href="index.html#install">Как установить</a><a href="index.html#install-restore">Вернуть английский</a><a href="psycho-sleuth.html#faq">Вопросы: Psycho-Sleuth</a><a href="false-alice.html#faq">Вопросы: False Alice</a></div>
+<div><h3>Мы</h3><a href="https://t.me/perevedeno_w" target="_blank" rel="noopener">Telegram</a><a href="index.html#about">О нас</a></div>
+</nav>
+</div>
+<div class="ft-bottom"><span class="ft-legal">Фанатский перевод, не связан с разработчиками. Игры принадлежат правообладателям.</span><span>© 2026 Переведено.</span><a class="ft-top" href="#">Наверх <span class="up" aria-hidden="true">↑</span></a></div>
 </footer>
 </div>
 <script data-goatcounter="https://worthless.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -6,10 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>[Превью] Лаунчер «Переведено.» — макет интерфейса</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="tokens.css?v=2">
-<link rel="stylesheet" href="launcher.css?v=2">
+<link rel="stylesheet" href="tokens.css?v=3">
+<link rel="stylesheet" href="launcher.css?v=3">
 <script>if(/[?&]embed=1\b/.test(location.search))document.documentElement.className='embed';</script>
-<script src="launcher.js?v=2" defer></script>
+<script src="launcher.js?v=3" defer></script>
 </head>
 <body>
 <div class="stage">
@@ -27,11 +27,11 @@
 <div class="side-h">Библиотека</div>
 <nav class="glist" id="glist" aria-label="Игры">
 <span class="gsel" id="gsel" aria-hidden="true"></span>
-<button type="button" class="gi" data-game="ps"><span class="gi-cov" style="background-image:url(img/cover-psycho-sleuth.webp)"></span><span class="gi-t"><strong>Psycho-Sleuth</strong><span class="gi-st"></span></span></button>
-<button type="button" class="gi" data-game="fa"><span class="gi-cov" style="background-image:url(img/cover-false-alice.webp)"></span><span class="gi-t"><strong>The False Alice <small>демо</small></strong><span class="gi-st"></span></span></button>
 </nav>
+<button type="button" class="addb" id="addBtn"><span class="pl">+</span>Добавить новеллу</button>
 <div class="side-sp"></div>
 <div class="side-f">
+<button type="button" class="gi set cat" id="catBtn"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg></span><span class="gi-t"><strong>Каталог</strong></span></button>
 <button type="button" class="gi set" id="setBtn"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><span class="gi-t"><strong>Настройки</strong></span></button>
 <div class="side-v">лаунчер 0.1 · макет</div>
 </div>
@@ -39,6 +39,7 @@
 
 <main class="main">
 <section class="scr" id="scrLib" aria-label="Игра"></section>
+<section class="scr" id="scrCat" aria-label="Каталог" hidden></section>
 <section class="scr" id="scrSet" aria-label="Настройки" hidden>
 <div class="set-w">
 <h1 class="ap" style="--i:0">Настройки</h1>
@@ -63,6 +64,8 @@
 </main>
 </div>
 
+<div class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgT" hidden><div class="dlg-c" id="dlgC"></div></div>
+
 <div class="toast" id="toast" role="status" aria-live="polite">
 <span class="toast-ic">1.4</span>
 <div class="toast-t"><strong>Вышла версия 1.4</strong><span>Psycho-Sleuth · русский перевод</span><button type="button" class="btn btn-primary btn-s" data-toast-go>Обновить <span class="arr">→</span></button></div>
@@ -75,8 +78,9 @@
 
 <aside class="demo" id="demo" aria-label="Демо-состояния (только в макете)">
 <span class="demo-l">Демо</span>
+<div class="dg" data-g="lib"><span>Библиотека:</span><button type="button" class="dc" data-v="0">Пустая (первый запуск)</button><button type="button" class="dc" data-v="1">Одна игра</button><button type="button" class="dc" data-v="2">Обе</button></div>
 <div class="dg" data-g="game"><span>Игра:</span><button type="button" class="dc" data-v="ps">Psycho-Sleuth</button><button type="button" class="dc" data-v="fa">False Alice</button></div>
-<div class="dg" data-g="screen"><span>Экран:</span><button type="button" class="dc" data-v="lib">Библиотека</button><button type="button" class="dc" data-v="set">Настройки</button></div>
+<div class="dg" data-g="screen"><span>Экран:</span><button type="button" class="dc" data-v="lib">Библиотека</button><button type="button" class="dc" data-v="cat">Каталог</button><button type="button" class="dc" data-v="set">Настройки</button></div>
 <div class="dg" data-g="state"><span>Кнопка:</span><button type="button" class="dc" data-v="none">Не установлено</button><button type="button" class="dc" data-v="installing">Установка</button><button type="button" class="dc" data-v="installed">Установлено · «Играть»</button><button type="button" class="dc" data-v="update">Есть обновление</button><button type="button" class="dc" data-v="updating">Обновляется</button><button type="button" class="dc" data-v="err-nf">Игра не найдена</button><button type="button" class="dc" data-v="err-ver">Версия не та</button></div>
 <div class="dg"><button type="button" class="dc" data-act="toast">Тост «1.4»</button><button type="button" class="dc play" data-act="tour">▶ Показ по очереди</button></div>
 </aside>

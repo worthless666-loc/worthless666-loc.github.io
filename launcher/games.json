@@ -1,0 +1,125 @@
+{
+  "format": 1,
+  "updated": "2026-11-25T06:00:00Z",
+  "mirrors": [
+    "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
+  ],
+  "games": [
+    {
+      "id": "psycho-sleuth",
+      "name": "Psycho-Sleuth",
+      "tag": "",
+      "status": "ready",
+      "statusText": "Готово",
+      "kind": "Steam · ПК",
+      "description": "Детективная новелла про Отбор, Патосинки и Бога Логики",
+      "credit": "Арт: © PHOSEPO",
+      "page": "https://perevedeno.com/psycho-sleuth.html",
+      "art": {
+        "url": "img/art-psycho-sleuth.jpg",
+        "sha256": "ffb88e7014a7ea168fcc0341ad7e1504d693a99b2788c7e5ddacdcb8d0914d37",
+        "pos": "18% 22%"
+      },
+      "cover": {
+        "url": "img/cover-psycho-sleuth.webp",
+        "sha256": "ad0a62377aea29f0978c63f9e0a15eab3092027c99e72a638eedca989845be39"
+      },
+      "steam": {
+        "appid": "3432860"
+      },
+      "detect": {
+        "dataDirs": [
+          "Psycho Sleuth_Data"
+        ],
+        "marker": "sharedassets0.assets"
+      },
+      "percent": 90,
+      "patch": {
+        "version": "1.3",
+        "date": "2026-11-23",
+        "engine": "psru",
+        "minLauncher": "0.5.1",
+        "urls": [
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.3/Psycho-Sleuth_RU_Patcher.zip"
+        ],
+        "sha256": "32192716984b896b52b98d4ec5ab4e7bc0538c70e37157ffed2566cec5c10c77",
+        "size": 1357282,
+        "builds": [],
+        "notes": []
+      }
+    },
+    {
+      "id": "false-alice-demo",
+      "name": "The False Alice",
+      "tag": "демо",
+      "status": "demo",
+      "statusText": "Демо готово",
+      "kind": "Steam · ПК · демо",
+      "description": "Мрачная сказка от VISUAL ARTS про трёх Ложных Алис",
+      "credit": "Арт: © VISUAL ARTS",
+      "page": "https://perevedeno.com/false-alice.html",
+      "art": {
+        "url": "img/art-false-alice.jpg",
+        "sha256": "01f63505da486609f4ac618ef62ef8135c896307bd851be8887277f19e2d32f9",
+        "pos": "60px -265px",
+        "size": "680px auto"
+      },
+      "cover": {
+        "url": "img/cover-false-alice.webp",
+        "sha256": "b470c993c66b24d3e58999e315809ada9d02a7d32798e4026495e6e7dd4f2262"
+      },
+      "detect": {
+        "dataDirs": [
+          "ItsualiRetoldTrial_Data"
+        ],
+        "marker": "StreamingAssets/Database.pck.bytes"
+      },
+      "percent": 87,
+      "patch": {
+        "version": "1.0",
+        "date": "2026-11-24",
+        "engine": "faru",
+        "minLauncher": "0.5.1",
+        "urls": [
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/false-alice-demo-v1.0/False-Alice_RU_Patcher_demo.zip"
+        ],
+        "sha256": "83e3ced48bf0196f36086bd6683536f86c430c558336705789b9bb6d9470bc0e",
+        "size": 56742,
+        "builds": [],
+        "notes": []
+      }
+    },
+    {
+      "id": "false-alice",
+      "name": "The False Alice",
+      "tag": "полная версия",
+      "status": "wip",
+      "statusText": "В работе",
+      "kind": "Steam · ПК",
+      "description": "Полная игра — переводим дальше демо",
+      "credit": "Арт: © VISUAL ARTS",
+      "page": "https://perevedeno.com/false-alice.html",
+      "art": {
+        "url": "img/art-false-alice.jpg",
+        "sha256": "01f63505da486609f4ac618ef62ef8135c896307bd851be8887277f19e2d32f9",
+        "pos": "60px -265px",
+        "size": "680px auto"
+      },
+      "cover": {
+        "url": "img/cover-false-alice.webp",
+        "sha256": "b470c993c66b24d3e58999e315809ada9d02a7d32798e4026495e6e7dd4f2262"
+      },
+      "steam": {
+        "appid": "4013270"
+      },
+      "percent": 0,
+      "wip": {
+        "unit": "Главы",
+        "total": 0,
+        "done": 0,
+        "part": 0,
+        "note": "Сроков не обещаем — сообщим, когда выйдет"
+      }
+    }
+  ]
+}

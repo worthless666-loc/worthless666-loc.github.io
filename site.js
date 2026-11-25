@@ -10,7 +10,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]'); if (!a || typeof window.ym !== 'function') return;
     var h = a.getAttribute('href'), goal = '';
-    if (/\.zip(\?|$)/.test(h)) goal = /False-Alice/i.test(h) ? 'download-false-alice' : /Psycho-Sleuth/i.test(h) ? 'download-psycho-sleuth' : 'download';
+    if (/\.zip(\?|$)/.test(h)) goal = /Perevedeno-Launcher/i.test(h) ? 'download-launcher' : /False-Alice/i.test(h) ? 'download-false-alice' : /Psycho-Sleuth/i.test(h) ? 'download-psycho-sleuth' : 'download';
     else if (a.getAttribute('data-ym-goal')) goal = a.getAttribute('data-ym-goal');
     else if (a.getAttribute('data-goatcounter-click') === 'tg-subscribe') goal = 'tg-subscribe';
     if (goal) { try { window.ym(114653532, 'reachGoal', goal); } catch (err) {} }

@@ -398,3 +398,7 @@ body>div:first-child{
 .quiz-act .btn-ghost{background:transparent;color:#E8E6E1;border:1px solid #3A404D;text-decoration:none}
 .quiz-note{margin-top:10px;color:#8E8B84;font-size:13px;min-height:1.2em}
 @media (max-width:640px){.quiz{padding:22px 18px}.quiz-opts{grid-template-columns:minmax(0,1fr)}.quiz-res{grid-template-columns:minmax(0,1fr)}.quiz-art{max-width:240px}.quiz-q{font-size:19px}}
+
+/* ссылка «Не запускается лаунчер? Отдельный патчер» */
+.alt-dl a,a.alt-dl{color:#C9C6BF;text-decoration:underline;text-decoration-color:rgba(201,198,191,.35);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
+.alt-dl a:hover,a.alt-dl:hover{color:#F2B84B;text-decoration-color:#F2B84B}

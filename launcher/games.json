@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-25T22:00:00Z",
+  "updated": "2026-11-25T23:15:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -51,21 +51,19 @@
       },
       "percent": 90,
       "patch": {
-        "version": "1.5",
+        "version": "1.5.1",
         "date": "2026-11-26",
         "engine": "psru",
         "minLauncher": "0.5.1",
         "urls": [
-          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.5/Psycho-Sleuth_RU_Patcher.zip"
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.5.1/Psycho-Sleuth_RU_Patcher.zip"
         ],
-        "sha256": "58f17f4502dd710c28332336e93f45991ddab118421800c2cd609cf0e741bbad",
-        "size": 1357991,
+        "sha256": "f506edf7bdb1ae5b4a37eb62668d01c25771c25d3e8474f24b5fc5a14438debc",
+        "size": 1358061,
         "builds": [],
         "notes": [
-          "Исправлен род в репликах Лайла, Хайпера, Лены и Иерарха",
-          "Длинные субтитры в роликах больше не обрезаются",
-          "Кнопка «Далее» в опровержении больше не налезает на «Опровергнуть»",
-          "«Кизуна» в плашке имени и другие мелкие правки — 133 строки"
+          "Исправлен род ещё в 28 репликах (Лайл, Эйрис, Лена, Хайпер, Алиса, Кизуна, Котари)",
+          "Всё из 1.5: длинные субтитры, кнопка «Далее», «Кизуна» в плашке"
         ]
       }
     },

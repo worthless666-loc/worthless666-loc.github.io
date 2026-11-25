@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-25T06:00:00Z",
+  "updated": "2026-11-25T10:00:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -45,7 +45,11 @@
         "sha256": "32192716984b896b52b98d4ec5ab4e7bc0538c70e37157ffed2566cec5c10c77",
         "size": 1357282,
         "builds": [],
-        "notes": []
+        "notes": [
+          "Полная вычитка всего текста",
+          "Исправлен сдвиг реплик в главе 2",
+          "Переведена 21 картинка с надписями и имена на карточках персонажей"
+        ]
       }
     },
     {
@@ -86,7 +90,11 @@
         "sha256": "83e3ced48bf0196f36086bd6683536f86c430c558336705789b9bb6d9470bc0e",
         "size": 56742,
         "builds": [],
-        "notes": []
+        "notes": [
+          "Весь текст демо: 5 сцен, 1285 строк",
+          "Имена персонажей, текстовое меню и настройки",
+          "Кириллица в шрифте игры стоит ровно, без разрядки"
+        ]
       }
     },
     {
@@ -96,7 +104,7 @@
       "status": "wip",
       "statusText": "В работе",
       "kind": "Steam · ПК",
-      "description": "Полная игра — переводим дальше демо",
+      "description": "Полная игра выходит 26.11.2026 — переводим дальше демо",
       "credit": "Арт: © VISUAL ARTS",
       "page": "https://perevedeno.com/false-alice.html",
       "art": {

@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-25T19:00:00Z",
+  "updated": "2026-11-25T22:00:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -51,19 +51,21 @@
       },
       "percent": 90,
       "patch": {
-        "version": "1.4",
-        "date": "2026-11-25",
+        "version": "1.5",
+        "date": "2026-11-26",
         "engine": "psru",
         "minLauncher": "0.5.1",
         "urls": [
-          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.4/Psycho-Sleuth_RU_Patcher.zip"
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.5/Psycho-Sleuth_RU_Patcher.zip"
         ],
-        "sha256": "fad0ed47b8a2a6f75e45a1f8c857998c732c41465e2c597f5af51768858e63a1",
-        "size": 1357547,
+        "sha256": "58f17f4502dd710c28332336e93f45991ddab118421800c2cd609cf0e741bbad",
+        "size": 1357991,
         "builds": [],
         "notes": [
-          "Перевод под обновление игры от 25.11.2026",
-          "Весь текст и картинки версии 1.3 перенесены на новую версию игры"
+          "Исправлен род в репликах Лайла, Хайпера, Лены и Иерарха",
+          "Длинные субтитры в роликах больше не обрезаются",
+          "Кнопка «Далее» в опровержении больше не налезает на «Опровергнуть»",
+          "«Кизуна» в плашке имени и другие мелкие правки — 133 строки"
         ]
       }
     },

@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-25T18:00:00Z",
+  "updated": "2026-11-25T18:30:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -51,20 +51,19 @@
       },
       "percent": 90,
       "patch": {
-        "version": "1.3",
-        "date": "2026-11-23",
+        "version": "1.4",
+        "date": "2026-11-25",
         "engine": "psru",
         "minLauncher": "0.5.1",
         "urls": [
-          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.3/Psycho-Sleuth_RU_Patcher.zip"
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/v1.4/Psycho-Sleuth_RU_Patcher.zip"
         ],
-        "sha256": "32192716984b896b52b98d4ec5ab4e7bc0538c70e37157ffed2566cec5c10c77",
-        "size": 1357282,
+        "sha256": "fad0ed47b8a2a6f75e45a1f8c857998c732c41465e2c597f5af51768858e63a1",
+        "size": 1357547,
         "builds": [],
         "notes": [
-          "Полная вычитка всего текста",
-          "Исправлен сдвиг реплик в главе 2",
-          "Переведена 21 картинка с надписями и имена на карточках персонажей"
+          "Перевод под обновление игры от 25.11.2026",
+          "Весь текст и картинки версии 1.3 перенесены на новую версию игры"
         ]
       }
     },

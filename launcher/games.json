@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-25T18:30:00Z",
+  "updated": "2026-11-25T19:00:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -9,15 +9,15 @@
     "min": 10
   },
   "launcher": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "urls": [
-      "https://perevedeno.com/launcher/Perevedeno-Launcher-1.0.0.zip",
-      "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/launcher-v1.0.0/Perevedeno-Launcher-1.0.0.zip"
+      "https://perevedeno.com/launcher/Perevedeno-Launcher-1.0.1.zip",
+      "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/launcher-v1.0.1/Perevedeno-Launcher-1.0.1.zip"
     ],
-    "sha256": "2662e9518e0829b096d5a7b8b236f8a13168935dacbd785f65bc50c7d7b3ede6",
-    "size": 705180,
+    "sha256": "361c5a0b1e705d6238b0a23ff255e26b83c126163c2e9b6a7df5248f3380ef3d",
+    "size": 706111,
     "notes": [
-      "Первый выпуск"
+      "Исправлено: после обновления игры в Steam перевод больше не ломает игру — лаунчер сам предложит проверить файлы"
     ]
   },
   "games": [

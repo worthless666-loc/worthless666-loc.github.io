@@ -1,7 +1,7 @@
 {
   "updated": "2026-11-27",
-  "released": false,
-  "total": 85,
+  "released": true,
+  "total": 90,
   "parts": [
     {
       "id": "ch1",
@@ -51,11 +51,11 @@
     {
       "id": "ui",
       "title": "Интерфейс и бонусы",
-      "note": "меню и настройки — из демо; просмотр спрайтов и «Общение» — в очереди",
-      "status": "queue",
+      "note": "меню, настройки, просмотр спрайтов",
+      "status": "done",
       "lines": 218,
-      "translated": 91,
-      "edited": 91
+      "translated": 218,
+      "edited": 218
     }
   ]
 }

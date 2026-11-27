@@ -41,10 +41,10 @@
       "id": "ch5",
       "title": "Глава 5",
       "note": "истории героинь",
-      "status": "translate",
+      "status": "done",
       "lines": 949,
-      "translated": 0,
-      "edited": 0
+      "translated": 949,
+      "edited": 949
     },
     {
       "id": "ui",

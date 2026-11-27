@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-27T14:35:00Z",
+  "updated": "2026-11-27T15:15:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -68,13 +68,62 @@
       }
     },
     {
+      "id": "false-alice",
+      "name": "The False Alice",
+      "tag": "полная версия",
+      "status": "ready",
+      "statusText": "Готово",
+      "kind": "Steam · ПК",
+      "description": "Мрачная сказка от VISUAL ARTS про трёх Ложных Алис",
+      "credit": "Арт: © VISUAL ARTS",
+      "page": "https://perevedeno.com/false-alice-full.html",
+      "art": {
+        "url": "img/art-false-alice.jpg",
+        "sha256": "01f63505da486609f4ac618ef62ef8135c896307bd851be8887277f19e2d32f9",
+        "pos": "60px -265px",
+        "size": "680px auto"
+      },
+      "cover": {
+        "url": "img/cover-false-alice.webp",
+        "sha256": "b470c993c66b24d3e58999e315809ada9d02a7d32798e4026495e6e7dd4f2262"
+      },
+      "steam": {
+        "appid": "4013270"
+      },
+      "detect": {
+        "dataDirs": [
+          "ItsualiRetold_Data"
+        ],
+        "marker": "StreamingAssets/Database.pck.bytes"
+      },
+      "percent": 90,
+      "patch": {
+        "version": "1.0",
+        "date": "2026-11-27",
+        "engine": "faru",
+        "minLauncher": "1.0.3",
+        "urls": [
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/fa-full-v1.0/False-Alice-RU-Patcher.zip"
+        ],
+        "sha256": "e3de428a1673c2e324bfaf58feedf28da768c193f3e1c12d6bb4084386cc2527",
+        "size": 2108787,
+        "builds": [],
+        "notes": [
+          "Весь сюжет: 5 глав, ≈20 250 строк",
+          "Интерфейс и картинки меню на русском",
+          "Кириллица в шрифтах игры"
+        ],
+        "build": "2.1"
+      }
+    },
+    {
       "id": "false-alice-demo",
       "name": "The False Alice",
       "tag": "демо",
       "status": "demo",
       "statusText": "Демо готово",
       "kind": "Steam · ПК · демо",
-      "description": "Мрачная сказка от VISUAL ARTS про трёх Ложных Алис",
+      "description": "Демо: перевод бесплатной демоверсии в Steam",
       "credit": "Арт: © VISUAL ARTS",
       "page": "https://perevedeno.com/false-alice.html",
       "art": {
@@ -109,54 +158,6 @@
           "Весь текст демо: 5 сцен, 1285 строк",
           "Имена персонажей, текстовое меню и настройки",
           "Кириллица в шрифте игры стоит ровно, без разрядки"
-        ]
-      }
-    },
-    {
-      "id": "false-alice",
-      "name": "The False Alice",
-      "tag": "полная версия",
-      "status": "ready",
-      "statusText": "Готово",
-      "kind": "Steam · ПК",
-      "description": "Мрачная сказка от VISUAL ARTS про трёх Ложных Алис",
-      "credit": "Арт: © VISUAL ARTS",
-      "page": "https://perevedeno.com/false-alice-full.html",
-      "art": {
-        "url": "img/art-false-alice.jpg",
-        "sha256": "01f63505da486609f4ac618ef62ef8135c896307bd851be8887277f19e2d32f9",
-        "pos": "60px -265px",
-        "size": "680px auto"
-      },
-      "cover": {
-        "url": "img/cover-false-alice.webp",
-        "sha256": "b470c993c66b24d3e58999e315809ada9d02a7d32798e4026495e6e7dd4f2262"
-      },
-      "steam": {
-        "appid": "4013270"
-      },
-      "detect": {
-        "dataDirs": [
-          "ItsualiRetold_Data"
-        ],
-        "marker": "StreamingAssets/Database.pck.bytes"
-      },
-      "percent": 90,
-      "patch": {
-        "version": "2.1",
-        "date": "2026-11-27",
-        "engine": "faru",
-        "minLauncher": "1.0.3",
-        "urls": [
-          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/fa-full-2.1/False-Alice-RU-Patcher.zip"
-        ],
-        "sha256": "5955a8f4c85da0a7a5f54746fa4289128d07f6f748396484f0eb53b65dceae3a",
-        "size": 2109157,
-        "builds": [],
-        "notes": [
-          "Весь сюжет: 5 глав, ≈20 250 строк",
-          "Интерфейс и картинки меню на русском",
-          "Кириллица в шрифтах игры"
         ]
       }
     }

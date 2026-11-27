@@ -23,16 +23,16 @@
       "id": "ch3",
       "title": "Глава 3",
       "note": "",
-      "status": "translate",
+      "status": "done",
       "lines": 5323,
-      "translated": 0,
-      "edited": 0
+      "translated": 5323,
+      "edited": 5323
     },
     {
       "id": "ch4",
       "title": "Глава 4",
       "note": "финальная",
-      "status": "queue",
+      "status": "translate",
       "lines": 6827,
       "translated": 0,
       "edited": 0

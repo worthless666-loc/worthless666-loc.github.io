@@ -1,11 +1,59 @@
 {
   "updated": "2026-11-27",
   "parts": [
-    {"id": "ch1", "title": "Глава 1", "note": "продолжение демо", "status": "edit", "lines": 3957, "translated": 3957, "edited": 2637},
-    {"id": "ch2", "title": "Глава 2", "note": "", "status": "queue", "lines": 2980, "translated": 0, "edited": 0},
-    {"id": "ch3", "title": "Глава 3", "note": "", "status": "queue", "lines": 5323, "translated": 0, "edited": 0},
-    {"id": "ch4", "title": "Глава 4", "note": "финальная", "status": "queue", "lines": 6827, "translated": 0, "edited": 0},
-    {"id": "ch5", "title": "Глава 5", "note": "истории героинь", "status": "queue", "lines": 949, "translated": 0, "edited": 0},
-    {"id": "ui", "title": "Интерфейс и бонусы", "note": "меню и настройки — из демо; просмотр спрайтов и «Общение» — в очереди", "status": "queue", "lines": 218, "translated": 91, "edited": 91}
+    {
+      "id": "ch1",
+      "title": "Глава 1",
+      "note": "продолжение демо",
+      "status": "done",
+      "lines": 3957,
+      "translated": 3957,
+      "edited": 3957
+    },
+    {
+      "id": "ch2",
+      "title": "Глава 2",
+      "note": "",
+      "status": "translate",
+      "lines": 2980,
+      "translated": 0,
+      "edited": 0
+    },
+    {
+      "id": "ch3",
+      "title": "Глава 3",
+      "note": "",
+      "status": "queue",
+      "lines": 5323,
+      "translated": 0,
+      "edited": 0
+    },
+    {
+      "id": "ch4",
+      "title": "Глава 4",
+      "note": "финальная",
+      "status": "queue",
+      "lines": 6827,
+      "translated": 0,
+      "edited": 0
+    },
+    {
+      "id": "ch5",
+      "title": "Глава 5",
+      "note": "истории героинь",
+      "status": "queue",
+      "lines": 949,
+      "translated": 0,
+      "edited": 0
+    },
+    {
+      "id": "ui",
+      "title": "Интерфейс и бонусы",
+      "note": "меню и настройки — из демо; просмотр спрайтов и «Общение» — в очереди",
+      "status": "queue",
+      "lines": 218,
+      "translated": 91,
+      "edited": 91
+    }
   ]
 }

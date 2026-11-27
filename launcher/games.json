@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-27T15:15:00Z",
+  "updated": "2026-11-27T16:50:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -127,10 +127,9 @@
       "credit": "Арт: © VISUAL ARTS",
       "page": "https://perevedeno.com/false-alice.html",
       "art": {
-        "url": "img/art-false-alice.jpg",
-        "sha256": "01f63505da486609f4ac618ef62ef8135c896307bd851be8887277f19e2d32f9",
-        "pos": "60px -265px",
-        "size": "680px auto"
+        "url": "img/art-false-alice-demo.jpg",
+        "sha256": "61d1b191548ade67efbbc2a272806bafe1c7acb220b28514e951952e74b62b30",
+        "pos": "50% 20%"
       },
       "cover": {
         "url": "img/cover-false-alice.webp",

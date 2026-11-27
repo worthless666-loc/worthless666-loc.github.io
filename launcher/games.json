@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-27T16:50:00Z",
+  "updated": "2026-11-27T17:05:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -118,7 +118,7 @@
     },
     {
       "id": "false-alice-demo",
-      "name": "The False Alice",
+      "name": "The False Alice -Retold Tale- Demo",
       "tag": "демо",
       "status": "demo",
       "statusText": "Демо готово",

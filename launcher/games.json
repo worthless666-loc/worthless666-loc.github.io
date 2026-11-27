@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "updated": "2026-11-25T23:15:00Z",
+  "updated": "2026-11-27T13:40:00Z",
   "mirrors": [
     "https://raw.githubusercontent.com/worthless666-loc/worthless666-loc.github.io/HEAD/launcher/games.json"
   ],
@@ -9,15 +9,15 @@
     "min": 10
   },
   "launcher": {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "urls": [
-      "https://perevedeno.com/launcher/Perevedeno-Launcher-1.0.1.zip",
-      "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/launcher-v1.0.1/Perevedeno-Launcher-1.0.1.zip"
+      "https://perevedeno.com/launcher/Perevedeno-Launcher-1.0.2.zip",
+      "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/launcher-v1.0.2/Perevedeno-Launcher-1.0.2.zip"
     ],
-    "sha256": "361c5a0b1e705d6238b0a23ff255e26b83c126163c2e9b6a7df5248f3380ef3d",
-    "size": 706111,
+    "sha256": "01a61172e913766cab69bacf2164f018eedec636b6f252d3102053de9d45a2b6",
+    "size": 710654,
     "notes": [
-      "Исправлено: после обновления игры в Steam перевод больше не ломает игру — лаунчер сам предложит проверить файлы"
+      "Поддержка полной версии The False Alice"
     ]
   },
   "games": [
@@ -116,12 +116,12 @@
       "id": "false-alice",
       "name": "The False Alice",
       "tag": "полная версия",
-      "status": "wip",
-      "statusText": "В работе",
+      "status": "ready",
+      "statusText": "Готово",
       "kind": "Steam · ПК",
-      "description": "Полная игра выходит 26.11.2026 — переводим дальше демо",
+      "description": "Мрачная сказка от VISUAL ARTS про трёх Ложных Алис",
       "credit": "Арт: © VISUAL ARTS",
-      "page": "https://perevedeno.com/false-alice.html",
+      "page": "https://perevedeno.com/false-alice-full.html",
       "art": {
         "url": "img/art-false-alice.jpg",
         "sha256": "01f63505da486609f4ac618ef62ef8135c896307bd851be8887277f19e2d32f9",
@@ -135,13 +135,29 @@
       "steam": {
         "appid": "4013270"
       },
-      "percent": 0,
-      "wip": {
-        "unit": "Главы",
-        "total": 0,
-        "done": 0,
-        "part": 0,
-        "note": "Сроков не обещаем — сообщим, когда выйдет"
+      "detect": {
+        "dataDirs": [
+          "ItsualiRetold_Data"
+        ],
+        "marker": "StreamingAssets/Database.pck.bytes"
+      },
+      "percent": 90,
+      "patch": {
+        "version": "2.0",
+        "date": "2026-11-27",
+        "engine": "faru",
+        "minLauncher": "1.0.2",
+        "urls": [
+          "https://github.com/worthless666-loc/worthless666-loc.github.io/releases/download/fa-full-1.0/False-Alice-RU-Patcher.zip"
+        ],
+        "sha256": "deaa20c2d7de0d2edfbf213432ead4924d037ef9e0ae26dbd6ee9867af867b46",
+        "size": 2105150,
+        "builds": [],
+        "notes": [
+          "Весь сюжет: 5 глав, ≈20 250 строк",
+          "Интерфейс и картинки меню на русском",
+          "Кириллица в шрифтах игры"
+        ]
       }
     }
   ]

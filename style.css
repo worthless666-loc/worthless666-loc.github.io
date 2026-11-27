@@ -402,3 +402,24 @@ body>div:first-child{
 /* ссылка «Не запускается лаунчер? Отдельный патчер» */
 .alt-dl a,a.alt-dl{color:#C9C6BF;text-decoration:underline;text-decoration-color:rgba(201,198,191,.35);text-underline-offset:3px;transition:color .2s,text-decoration-color .2s}
 .alt-dl a:hover,a.alt-dl:hover{color:#F2B84B;text-decoration-color:#F2B84B}
+
+/* ---------- прогресс полной False Alice по главам ---------- */
+.fap{display:flex;flex-direction:column;gap:14px}
+.fap-row{background:#161A22;border:1px solid #262B36;border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:10px;transition:border-color .3s}
+.fap-row:hover{border-color:#3A404D}
+.fap-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px}
+.fap-t{font-weight:600;font-size:18px}
+.fap-t small{font-weight:400;font-size:15px;color:#9A978F}
+.fap-st{font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;background:#232833;color:#9A978F}
+.fap-row[data-st=translate] .fap-st{background:#2A2418;color:#F2D9A6}
+.fap-row[data-st=edit] .fap-st{background:#1C2738;color:#9CC3F5}
+.fap-row[data-st=done] .fap-st{background:#1F3A2A;color:#8FE3A8}
+.fap-bar{height:8px;background:#262B36;border-radius:999px;overflow:hidden}
+.fap-bar i{display:block;height:100%;background:#F2B84B;border-radius:999px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.fap-row[data-st=queue] .fap-bar i{background:#4A505C}
+.fap-row[data-st=done] .fap-bar i{background:#8FE3A8}
+.fap-m{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;font-size:14px;color:#9A978F}
+.fap-m b{color:#E8E6E1;font-weight:600;font-variant-numeric:tabular-nums}
+.fap-total{background:#161A22;border:1px solid #262B36;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.fap-total .fap-bar{height:12px}
+@media (max-width:480px){.fap-row{padding:14px 16px}.fap-t{font-size:17px}}

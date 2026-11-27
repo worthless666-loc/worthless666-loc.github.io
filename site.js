@@ -597,7 +597,8 @@
     fetch('data/false-alice-progress.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
       var P = d.parts || [], L = 0, T = 0, E = 0, ch = 0, chDone = 0;
       P.forEach(function (p) { L += p.lines; T += p.translated; E += p.edited; if (/^ch/.test(p.id)) { ch++; if (p.status === 'done') chDone++; } });
-      var total = pc(T, E, L);
+      /* правило сайта: общий % игры — 85–95 (озвучку и ролики не переводим); до выхода патча — не выше 85 */
+      var total = Math.min(typeof d.total === 'number' ? d.total : pc(T, E, L), d.released ? 95 : 85);
       els.forEach(function (el) {
         var k = el.getAttribute('data-fap');
         if (k === 'total') el.textContent = total + '%';
@@ -607,12 +608,12 @@
         else if (k === 'updated') el.textContent = date(d.updated);
         else if (k === 'list') {
           el.innerHTML = P.map(function (p) {
-            var v = pc(p.translated, p.edited, p.lines), st = ST[p.status] ? p.status : 'queue';
+            var st = ST[p.status] ? p.status : 'queue', done = st === 'done', v = done ? 100 : pc(p.translated, p.edited, p.lines);
             return '<div class="fap-row" data-st="' + st + '">' +
               '<div class="fap-h"><span class="fap-t">' + esc(p.title) + (p.note ? ' <small>— ' + esc(p.note) + '</small>' : '') + '</span>' +
               '<span class="fap-st">' + ST[st] + '</span></div>' +
               '<div class="fap-bar" role="progressbar" aria-label="' + esc(p.title) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + v + '"><i style="width:' + v + '%"></i></div>' +
-              '<div class="fap-m"><span>переведено ' + num(p.translated) + ' из ' + num(p.lines) + ' строк' + (p.edited ? ' · вычитано ' + num(p.edited) : '') + '</span><b>' + v + '%</b></div></div>';
+              '<div class="fap-m"><span>переведено ' + num(p.translated) + ' из ' + num(p.lines) + ' строк' + (p.edited ? ' · вычитано ' + num(p.edited) : '') + '</span>' + (done ? '' : '<b>' + v + '%</b>') + '</div></div>';
           }).join('');
           el.classList.add('fap-ready');
         }
